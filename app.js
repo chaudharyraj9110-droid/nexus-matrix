@@ -1,96 +1,66 @@
 /**
- * Nexus Mobile Core JavaScript File
+ * Nexus Stream Video Control Engine Logic
  */
 
-document.addEventListener("DOMContentLoaded", () => {
-    initAIListeners();
-});
-
-function triggerNotification(message, duration = 3500, color = "#38bdf8") {
+function triggerNotification(message, color = "#ff0000") {
     const toast = document.getElementById("toastContainer");
     toast.innerText = message;
     toast.style.borderLeftColor = color;
     toast.classList.add("show");
-    
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, duration);
+    setTimeout(() => { toast.classList.remove("show"); }, 3000);
 }
 
-function initAIListeners() {
-    const privacyToggle = document.getElementById("privacyShieldToggle");
-    const privacyShield = document.getElementById("privacyShield");
-    
-    privacyToggle.addEventListener("change", (e) => {
-        if (e.target.checked) {
-            privacyShield.style.opacity = "1";
-            triggerNotification("AI Mobile Privacy Blur Activated", 2000, "#10b981");
-        } else {
-            privacyShield.style.opacity = "0";
-            triggerNotification("Privacy Protection Suspended", 2500, "#f43f5e");
-        }
-    });
-}
-
-function toggleTrack(trackType) {
-    triggerNotification(`Inspecting track channel component: [${trackType.toUpperCase()}]`, 1500);
-}
-
-function simulateCopyrightStrike() {
-    const audioLane = document.getElementById("laneAudio");
-    const audioPill = document.getElementById("audioPill");
-    const protectionBadge = document.getElementById("protectionBadge");
-    
-    triggerNotification("⚠️ DMCA Flag Matched! Threat Detected.", 2500, "#f43f5e");
-    
-    audioLane.classList.add("hit");
-    protectionBadge.classList.add("claimed");
-    protectionBadge.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Swapping Core...`;
-    
-    setTimeout(() => {
-        audioPill.innerText = "ai_procedural_safe_synth.mp3";
-        audioLane.classList.remove("hit");
-        protectionBadge.classList.remove("claimed");
-        protectionBadge.innerHTML = `<i class="fas fa-gavel"></i> Safe Mode`;
-        
-        triggerNotification("🛡️ System Isolated. Third-party wave profile swapped for clean AI synth track. Container remains active!", 4500, "#10b981");
-    }, 2000);
-}
-
-function deploySmartContract() {
-    const address = document.getElementById("walletAddress").value.trim();
-    const split = document.getElementById("splitPercentage").value;
-    const walletDisplay = document.getElementById("walletDisplay");
-
-    if (!address.startsWith("0x") || address.length < 8) {
-        triggerNotification("Error: Invalid cryptographic wallet destination target signature.", 2500, "#f43f5e");
-        return;
-    }
-
-    if (!split || split < 1 || split > 100) {
-        triggerNotification("Error: Set percentage bounds between 1-100%.", 2500, "#f43f5e");
-        return;
-    }
-
-    triggerNotification("🔄 Uploading signature to local validating blocks...", 1500, "#a855f7");
-
-    setTimeout(() => {
-        walletDisplay.innerHTML = `<i class="fas fa-wallet"></i> 1.281 ETH`;
-        triggerNotification(`🚀 Broadcaster Success: ${split}% node-split successfully committed to immutable contract!`, 4000, "#10b981");
-    }, 1800);
-}
-
-function handleFileLoad(event) {
+// Intercept and load a real file from your Android device
+function playSelectedVideo(event) {
     const file = event.target.files[0];
-    const videoPill = document.getElementById("videoPill");
-    
-    if (file) {
-    
-        videoPill.innerText = file.name;
-        videoPill.style.color = "#ffffff"; // Turn text white to match layout
-        
+    const player = document.getElementById("mainVideoNode");
+    const titleDisplay = document.getElementById("activeVideoTitle");
 
-        triggerNotification(`Loaded local asset: ${file.name}`, 2500, "#10b981");
+    if (file) {
+        const fileURL = URL.createObjectURL(file);
+        player.src = fileURL;
+        player.load();
+        player.play();
+        
+        // Remove file path extensions from title text
+        titleDisplay.innerText = file.name.replace(/\.[^/.]+$/, "");
+        triggerNotification(`Playing Local File: ${file.name}`, "#10b981");
     }
 }
 
+// Load pre-configured open-source video stream assets
+function loadPresetVideo(videoUrl, titleText) {
+    const player = document.getElementById("mainVideoNode");
+    const titleDisplay = document.getElementById("activeVideoTitle");
+    
+    player.src = videoUrl;
+    player.load();
+    player.play();
+    
+    titleDisplay.innerText = titleText;
+    triggerNotification(`Streaming preset media channel...`, "#38bdf8");
+    
+    // Smoothly scroll back to the player viewport at top of screen
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function handleLike() {
+    const likeSpan = document.getElementById("likeCount");
+    let currentLikes = parseInt(likeSpan.innerText);
+    likeSpan.innerText = currentLikes + 1;
+    triggerNotification("Added to Liked Videos", "#10b981");
+}
+
+function toggleSubscribe() {
+    const subBtn = document.getElementById("subBtn");
+    if (subBtn.classList.contains("subscribed")) {
+        subBtn.classList.remove("subscribed");
+        subBtn.innerText = "SUBSCRIBE";
+        subBtn.style.backgroundColor = "#f1f1f1";
+    } else {
+        subBtn.classList.add("subscribed");
+        subBtn.innerText = "SUBSCRIBED";
+        subBtn.style.backgroundColor = "#272727";
+        triggerNotification("Subscribed to Channel", "#ff0000");
+    }
+}
