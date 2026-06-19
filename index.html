@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nexus Stream Ultra Pro - The Ecosystem Matrix</title>
+    <title>Nexus Stream Ultra Pro - Ultimate Ecosystem Matrix</title>
     <link rel="stylesheet" href="matrix-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Global App Top Status Bar -->
     <header class="app-header">
         <div class="logo-area">
             <i class="fas fa-cube" style="color: #6366f1; animation: spinMatrix 4s linear infinite;"></i> 
@@ -20,13 +19,14 @@
                 <i class="fas fa-wallet" style="color: #22c55e;"></i> <span id="headerBalance">$0.00</span>
             </div>
             <button class="chat-toggle-btn" onclick="toggleLiveChat()"><i class="fas fa-comments"></i> Chat</button>
+            <div class="user-profile-node" id="headerProfileAvatar" onclick="openAuthModal()">
+                <i class="fas fa-user-shield"></i>
+            </div>
         </div>
     </header>
 
-    <!-- MAIN VIEWPORT ROUTER SCREEN SWITCH CONTAINER -->
     <main class="app-main-body">
 
-        <!-- SCREEN MODULE 1: MAIN VIDEO STREAM HOME FEED -->
         <div id="homeScreen" class="app-screen active">
             <div class="video-scroll-container">
                 <section class="main-player-block">
@@ -86,7 +86,6 @@
             </div>
         </div>
 
-        <!-- SCREEN MODULE 2: VERTICAL PIP SHORTS ENGINE -->
         <div id="shortsScreen" class="app-screen">
             <div class="shorts-vertical-slider">
                 <div class="short-video-container">
@@ -104,7 +103,6 @@
             </div>
         </div>
 
-        <!-- SCREEN MODULE 3: THE PROCEDURAL SPACE MATRIX VIEWPORT -->
         <div id="spaceScreen" class="app-screen">
             <div class="space-viewport-container">
                 <canvas id="spaceCanvas"></canvas>
@@ -119,7 +117,6 @@
             </div>
         </div>
 
-        <!-- SCREEN MODULE 4: STUDIO CREATOR STUDIO INGEST HUB -->
         <div id="studioScreen" class="app-screen">
             <div class="studio-workspace-card">
                 <h3><i class="fas fa-video"></i> Media Core Content Ingest Studio</h3>
@@ -130,6 +127,7 @@
                     <p>Tap to select file from gallery</p>
                     <span class="file-spec-tag">Supports MP4, WebM formats</span>
                 </div>
+                <input type="file" id="mobileVideoSelector" accept="video/*" style="display: none;" onchange="playSelectedVideo(event)">
 
                 <div class="input-form-group">
                     <label>Broadcast Segment Title</label>
@@ -140,7 +138,6 @@
             </div>
         </div>
 
-        <!-- SCREEN MODULE 5: WALLET CREATOR MONETIZATION CENTER -->
         <div id="walletScreen" class="app-screen">
             <div class="wallet-dashboard-card">
                 <div class="wallet-title-node">CREATOR REVENUE LEDGER MATRIX</div>
@@ -164,7 +161,6 @@
 
     </main>
 
-    <!-- LIVE STREAM SLIDE OVERLAY CHAT DRAWER PANEL -->
     <div class="live-chat-panel" id="liveChatPanel">
         <div class="chat-header"><span>🔴 LIVE ECOSYSTEM CONSOLE CHAT</span><button class="close-chat-btn" onclick="toggleLiveChat()">×</button></div>
         <div class="chat-messages-box" id="chatBox">
@@ -177,7 +173,45 @@
         </div>
     </div>
 
-    <!-- PERSISTENT APP LOWER SYSTEM TAB NAVIGATION MATRIX BAR -->
+    <div class="auth-blur-overlay" id="authModal">
+        <div class="auth-card-matrix">
+            <div class="auth-tab-row">
+                <button class="auth-tab active" id="tabSignIn" onclick="toggleAuthForm('signin')">SIGN IN</button>
+                <button class="auth-tab" id="tabSignUp" onclick="toggleAuthForm('signup')">CREATE ACCOUNT</button>
+            </div>
+            
+            <div class="auth-form-view active" id="signInFormBlock">
+                <div class="input-form-group">
+                    <label>Identity Handle (Email or Profile Tag)</label>
+                    <input type="email" id="signInEmail" placeholder="user@nexus.matrix">
+                </div>
+                <div class="input-form-group">
+                    <label>Security Access Code</label>
+                    <input type="password" id="signInPass" placeholder="••••••••">
+                </div>
+                <button class="publish-submit-btn" style="background:#10b981;" onclick="handleAuthentication('signin')">ACCESS DECK</button>
+            </div>
+
+            <div class="auth-form-view" id="signUpFormBlock">
+                <div class="input-form-group">
+                    <label>Public Profile Username</label>
+                    <input type="text" id="signUpUser" placeholder="MatrixNomad">
+                </div>
+                <div class="input-form-group">
+                    <label>Identity Email Thread</label>
+                    <input type="email" id="signUpEmail" placeholder="nomad@nexus.matrix">
+                </div>
+                <div class="input-form-group">
+                    <label>Generate Access Code</label>
+                    <input type="password" id="signUpPass" placeholder="••••••••">
+                </div>
+                <button class="publish-submit-btn" onclick="handleAuthentication('signup')">INITIALIZE PROTOCOL</button>
+            </div>
+            
+            <button class="close-auth-card" onclick="closeAuthModal()">TERMINATE PROMPT</button>
+        </div>
+    </div>
+
     <nav class="app-bottom-navbar">
         <div class="nav-tab active" id="tab-home" onclick="switchTab('home')"><i class="fas fa-home"></i><span>Home</span></div>
         <div class="nav-tab" id="tab-shorts" onclick="switchTab('shorts')"><i class="fas fa-bolt"></i><span>Shorts</span></div>
@@ -186,7 +220,6 @@
         <div class="nav-tab" id="tab-wallet" onclick="switchTab('wallet')"><i class="fas fa-wallet"></i><span>Earnings</span></div>
     </nav>
 
-    <!-- Global App Notification System Alert Toast Overlay -->
     <div class="matrix-toast" id="toastContainer"></div>
 
     <script src="app.js"></script>
