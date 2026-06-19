@@ -33,11 +33,18 @@
             </div>
 
             <div class="lane-matrix">
-                <div class="media-lane" id="laneVideo">
-                    <div class="lane-meta"><i class="fas fa-file-video"></i> Video Asset</div>
-                    <div class="asset-pill">quantum_sim.mp4</div>
-                    <button class="lane-action-btn" onclick="toggleTrack('video')"><i class="fas fa-eye"></i></button>
-                </div>
+                <!-- Dynamic Video Track Lane Built for Touch Uploads -->
+<div class="media-lane" id="laneVideo">
+    <div class="lane-meta"><i class="fas fa-file-video"></i> Video Asset</div>
+    <!-- Hidden native android file selector -->
+    <input type="file" id="videoSourceInput" accept="video/*" style="display: none;" onchange="handleFileLoad(event)">
+    <!-- Touch target block -->
+    <div class="asset-pill" id="videoPill" onclick="document.getElementById('videoSourceInput').click()" style="cursor: pointer; color: #a855f7;">
+        Tap to select mobile video...
+    </div>
+    <button class="lane-action-btn" onclick="toggleTrack('video')"><i class="fas fa-eye"></i></button>
+</div>
+                
                 <div class="media-lane" id="laneVoice">
                     <div class="lane-meta"><i class="fas fa-microphone-alt"></i> Voice Track</div>
                     <div class="asset-pill">voiceover.wav</div>
