@@ -3,104 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nexus Mobile Matrix</title>
+    <title>Nexus Stream - Mobile Video Matrix</title>
     <link rel="stylesheet" href="matrix-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <header class="matrix-header">
-        <div class="brand-signature">NEXUS // MOB_CORE</div>
-        <div class="ledger-wallet" id="walletDisplay"><i class="fas fa-wallet"></i> 1.284 ETH</div>
+    <header class="app-header">
+        <div class="logo-area"><i class="fab fa-youtube" style="color: #ff0000; font-size: 22px;"></i> <span>NEXUS_STREAM</span></div>
+        <div class="header-actions">
+            <button class="upload-trigger-btn" onclick="document.getElementById('mobileVideoSelector').click()">
+                <i class="fas fa-camera"></i> Upload
+            </button>
+            <input type="file" id="mobileVideoSelector" accept="video/*" style="display: none;" onchange="playSelectedVideo(event)">
+            <div class="user-avatar">R</div>
+        </div>
     </header>
 
-    <div class="workspace-viewport">
+    <div class="video-scroll-container">
         
-        <main class="constructor-shield">
-            <div class="section-title">
-                <h2><i class="fas fa-cubes"></i> Multi-Track Element</h2>
-                <span class="protection-badge" id="protectionBadge"><i class="fas fa-gavel"></i> Safe Mode</span>
-            </div>
+        <section class="main-player-block">
+            <video id="mainVideoNode" controls autoplay muted poster="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800">
+                <source id="videoMediaSource" src="" type="video/mp4">
+                Your mobile browser does not support native video tags.
+            </video>
             
-            <div class="sandbox-render-frame">
-                <div class="active-canvas-container">
-                    <div class="ai-privacy-shield" id="privacyShield"><i class="fas fa-eye-slash"></i> AI Blur Active</div>
-                    <div class="media-placeholder-node" id="visualNode">
-                        <i class="fas fa-project-diagram matrix-pulse"></i>
-                        <p>CONTAINER ACTIVE</p>
+            <div class="video-details-card">
+                <h1 id="activeVideoTitle" class="video-display-title">Tap 'Upload' above to play a video from your gallery</h1>
+                <div class="video-metrics-bar">
+                    <span class="view-count">1.4K views • Just now</span>
+                    <div class="video-engagement-buttons">
+                        <button class="action-pill-btn" onclick="handleLike()"><i class="fas fa-thumbs-up"></i> <span id="likeCount">124</span></button>
+                        <button class="action-pill-btn"><i class="fas fa-share"></i> Share</button>
+                        <button class="subscribe-red-btn" id="subBtn" onclick="toggleSubscribe()">SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-feed-grid">
+            <h3 class="feed-section-heading">Recommended For You</h3>
+            
+            <div class="thumbnail-card" onclick="loadPresetVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', 'Big Buck Bunny Animation Core Short')">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500" alt="Thumbnail">
+                    <span class="duration-badge">9:56</span>
+                </div>
+                <div class="card-meta">
+                    <div class="channel-icon">A</div>
+                    <div class="text-meta">
+                        <h4>Big Buck Bunny Animation Core Short</h4>
+                        <p class="channel-title">Blender Foundation Core</p>
+                        <p class="view-subtitle">450K views • 2 days ago</p>
                     </div>
                 </div>
             </div>
 
-            <div class="lane-matrix">
-                <!-- Dynamic Video Track Lane Built for Touch Uploads -->
-<div class="media-lane" id="laneVideo">
-    <div class="lane-meta"><i class="fas fa-file-video"></i> Video Asset</div>
-    <!-- Hidden native android file selector -->
-    <input type="file" id="videoSourceInput" accept="video/*" style="display: none;" onchange="handleFileLoad(event)">
-    <!-- Touch target block -->
-    <div class="asset-pill" id="videoPill" onclick="document.getElementById('videoSourceInput').click()" style="cursor: pointer; color: #a855f7;">
-        Tap to select mobile video...
-    </div>
-    <button class="lane-action-btn" onclick="toggleTrack('video')"><i class="fas fa-eye"></i></button>
-</div>
-                
-                <div class="media-lane" id="laneVoice">
-                    <div class="lane-meta"><i class="fas fa-microphone-alt"></i> Voice Track</div>
-                    <div class="asset-pill">voiceover.wav</div>
-                    <button class="lane-action-btn" onclick="toggleTrack('voice')"><i class="fas fa-volume-up"></i></button>
+            <div class="thumbnail-card" onclick="loadPresetVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 'Elephants Dream - Open Source Studio Test VFX')">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=500" alt="Thumbnail">
+                    <span class="duration-badge">14:53</span>
                 </div>
-                <div class="media-lane protected-lane" id="laneAudio">
-                    <div class="lane-meta"><i class="fas fa-wave-square"></i> Audio Mesh</div>
-                    <div class="asset-pill" id="audioPill">synth_mesh.mp3</div>
-                    <button class="lane-action-btn context-trigger" onclick="simulateCopyrightStrike()"><i class="fas fa-triangle-exclamation"></i> Claim Test</button>
+                <div class="card-meta">
+                    <div class="channel-icon">E</div>
+                    <div class="text-meta">
+                        <h4>Elephants Dream - Open Source Studio Test VFX</h4>
+                        <p class="channel-title">VFX Architecture Lab</p>
+                        <p class="view-subtitle">1.2M views • 1 year ago</p>
+                    </div>
                 </div>
             </div>
-        </main>
-
-        <aside class="ai-processing-tower">
-            <section class="automation-card">
-                <h3><i class="fas fa-robot"></i> AI Sanitation Engine</h3>
-                <p class="subtitle-text">Manage real-time automated asset cleanup profiles.</p>
-                
-                <div class="control-row">
-                    <label>Strip Vocal Filler Words</label>
-                    <label class="matrix-switch">
-                        <input type="checkbox" id="fillerWordsToggle" checked>
-                        <span class="matrix-slider"></span>
-                    </label>
-                </div>
-                
-                <div class="control-row">
-                    <label>AI Dub Localization</label>
-                    <select class="matrix-dropdown" id="vocalTranslation">
-                        <option value="jp">Japanese (AI Dub)</option>
-                        <option value="es">Spanish (AI Dub)</option>
-                        <option value="de">German (AI Dub)</option>
-                    </select>
-                </div>
-
-                <div class="control-row">
-                    <label>Privacy Blur Protection</label>
-                    <label class="matrix-switch">
-                        <input type="checkbox" id="privacyShieldToggle" checked>
-                        <span class="matrix-slider"></span>
-                    </label>
-                </div>
-            </section>
-
-            <section class="automation-card contract-card-accent">
-                <h3><i class="fas fa-scroll"></i> Immutable Ledger</h3>
-                <p class="subtitle-text">Programmatic revenue splitting directly on-chain.</p>
-                
-                <div class="split-form-row">
-                    <input type="text" id="walletAddress" placeholder="Target Wallet Hash (0x...)" class="matrix-input field-hash">
-                    <input type="number" id="splitPercentage" placeholder="50" class="matrix-input field-percentage" min="1" max="100">%
-                </div>
-                
-                <button class="action-btn-neon" onclick="deploySmartContract()">Authorize & Deploy Split</button>
-            </section>
-        </aside>
+        </section>
     </div>
 
     <div class="matrix-toast" id="toastContainer"></div>
@@ -108,4 +81,3 @@
     <script src="app.js"></script>
 </body>
 </html>
-
