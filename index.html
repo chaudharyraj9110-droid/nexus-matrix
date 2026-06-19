@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nexus Stream Ultra Pro - Ultimate Ecosystem Matrix</title>
+    <title>Nexus Stream Ultra Pro</title>
     <link rel="stylesheet" href="matrix-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+    <!-- TOP HEADER LAYER -->
     <header class="app-header">
         <div class="logo-area">
-            <i class="fas fa-cube" style="color: #6366f1; animation: spinMatrix 4s linear infinite;"></i> 
-            <span>NEXUS_ULTRA_PRO</span>
+            <i class="fab fa-youtube" style="color: #ef4444; font-size: 22px;"></i> 
+            <span>NEXUS_STREAM</span>
         </div>
         <div class="header-actions">
             <div class="wallet-pill-display" onclick="switchTab('wallet')">
@@ -20,13 +21,15 @@
             </div>
             <button class="chat-toggle-btn" onclick="toggleLiveChat()"><i class="fas fa-comments"></i> Chat</button>
             <div class="user-profile-node" id="headerProfileAvatar" onclick="openAuthModal()">
-                <i class="fas fa-user-shield"></i>
+                <i class="fas fa-user"></i>
             </div>
         </div>
     </header>
 
+    <!-- CONTENT SCREEN ROUTER SWITCH PANELS -->
     <main class="app-main-body">
 
+        <!-- SCREEN 1: YOUTUBE HOME TYPOLOGY VIEWPORT -->
         <div id="homeScreen" class="app-screen active">
             <div class="video-scroll-container">
                 <section class="main-player-block">
@@ -36,6 +39,7 @@
                         </video>
                     </div>
 
+                    <!-- Ambient Equalizer Strip Layer -->
                     <div class="eq-visualizer-strip">
                         <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
                         <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
@@ -45,13 +49,14 @@
                     <div class="video-details-card">
                         <h1 id="activeVideoTitle" class="video-display-title">Big Buck Bunny Animation Core Short</h1>
                         <div class="interaction-tray">
-                            <button class="action-pill-btn" onclick="handleLike()"><i class="fas fa-heart"></i> <span id="likeCount">842</span></button>
+                            <button class="action-pill-btn" onclick="handleLike()"><i class="fas fa-thumbs-up"></i> <span id="likeCount">842</span></button>
                             <button class="action-pill-btn" onclick="addNewTimestamp()"><i class="fas fa-bookmark"></i> Pin Time</button>
                             <button class="subscribe-premium-btn" id="subBtn" onclick="toggleSubscribe()">SUBSCRIBE</button>
                         </div>
                     </div>
                 </section>
 
+                <!-- Audio Low-Latency FX Interactive Soundboard Launcher Node -->
                 <section class="launchpad-section">
                     <h3 class="section-title-tag"><i class="fas fa-music"></i> Audio Interaction Soundboard</h3>
                     <div class="launchpad-grid">
@@ -62,6 +67,7 @@
                     </div>
                 </section>
 
+                <!-- Pinned Timeline Anchor Navigation Metrics -->
                 <section class="interactive-marker-deck">
                     <h3 class="section-title-tag"><i class="fas fa-clock"></i> Pinned Narrative Time-Stamps</h3>
                     <div class="markers-scroll-row" id="markersContainer">
@@ -70,6 +76,7 @@
                     </div>
                 </section>
 
+                <!-- Feed Grid Recommendations Row -->
                 <section class="video-feed-grid">
                     <h3 class="feed-section-heading">Trending Over the Web</h3>
                     <div class="thumbnail-card" onclick="loadPresetVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 'Elephants Dream - Open VFX Lab Short')">
@@ -86,14 +93,15 @@
             </div>
         </div>
 
+        <!-- SCREEN 2: VERTICAL SHORTS SNAPPING MATRIX WINDOW -->
         <div id="shortsScreen" class="app-screen">
             <div class="shorts-vertical-slider">
                 <div class="short-video-container">
                     <video class="short-video-player" loop muted autoplay playsinline src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"></video>
                     <div class="short-meta-sidebar">
-                        <div class="sidebar-action" onclick="handleLike()"><i class="fas fa-heart"></i><span>45K</span></div>
-                        <div class="sidebar-action"><i class="fas fa-comment-dots"></i><span>1.2K</span></div>
-                        <div class="sidebar-action" onclick="playFX('laser')"><i class="fas fa-bolt"></i><span>Warp</span></div>
+                        <div class="sidebar-action" onclick="handleLike()"><i class="fas fa-thumbs-up"></i><span>45K</span></div>
+                        <div class="sidebar-action"><i class="fas fa-comment"></i><span>1.2K</span></div>
+                        <div class="sidebar-action" onclick="playFX('laser')"><i class="fas fa-share"></i><span>Warp</span></div>
                     </div>
                     <div class="short-info-overlay">
                         <h4>@AlphaCosmos</h4>
@@ -103,27 +111,14 @@
             </div>
         </div>
 
-        <div id="spaceScreen" class="app-screen">
-            <div class="space-viewport-container">
-                <canvas id="spaceCanvas"></canvas>
-                <div class="hud-overlay-panel">
-                    <h3>SPACE_MATRIX // PROCEDURAL RENDERING LOOP</h3>
-                    <p>Live canvas audio visualizer rendering continuous loop telemetry profiles.</p>
-                    <div class="hud-btn-row">
-                        <button class="hud-action-btn" id="audioToggleBtn" onclick="toggleSpaceAudio()">⚡ ACTIVATE AUDIO SYNTH</button>
-                        <button class="hud-action-btn" onclick="warpSpeed()">🚀 DEPLOY HYPER WARP</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <!-- SCREEN 3: CREATION INPUT INGEST CORE -->
         <div id="studioScreen" class="app-screen">
             <div class="studio-workspace-card">
-                <h3><i class="fas fa-video"></i> Media Core Content Ingest Studio</h3>
+                <h3><i class="fas fa-video"></i> Create Center Ingest Studio</h3>
                 <p class="studio-subtext">Publish new files straight into the platform ecosystem nodes.</p>
                 
                 <div class="drop-zone-box" onclick="document.getElementById('mobileVideoSelector').click()">
-                    <i class="fas fa-cloud-arrow-up" style="font-size: 40px; color: #6366f1; margin-bottom: 12px;"></i>
+                    <i class="fas fa-cloud-arrow-up" style="font-size: 40px; color: #ef4444; margin-bottom: 12px;"></i>
                     <p>Tap to select file from gallery</p>
                     <span class="file-spec-tag">Supports MP4, WebM formats</span>
                 </div>
@@ -138,6 +133,22 @@
             </div>
         </div>
 
+        <!-- SCREEN 4: DEEP SPACE MATRIX CANVAS VIEWPORT -->
+        <div id="spaceScreen" class="app-screen">
+            <div class="space-viewport-container">
+                <canvas id="spaceCanvas"></canvas>
+                <div class="hud-overlay-panel">
+                    <h3>SPACE_MATRIX // PROCEDURAL RENDERING LOOP</h3>
+                    <p>Live canvas audio visualizer rendering continuous loop telemetry profiles.</p>
+                    <div class="hud-btn-row">
+                        <button class="hud-action-btn" id="audioToggleBtn" onclick="toggleSpaceAudio()">⚡ ACTIVATE AUDIO SYNTH</button>
+                        <button class="hud-action-btn" onclick="warpSpeed()">🚀 DEPLOY HYPER WARP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 5: LEDGER WALLET EARNINGS CONSOLE -->
         <div id="walletScreen" class="app-screen">
             <div class="wallet-dashboard-card">
                 <div class="wallet-title-node">CREATOR REVENUE LEDGER MATRIX</div>
@@ -161,6 +172,7 @@
 
     </main>
 
+    <!-- SLIDING ACCESS CHAT DRAWER PANEL OVERLAY -->
     <div class="live-chat-panel" id="liveChatPanel">
         <div class="chat-header"><span>🔴 LIVE ECOSYSTEM CONSOLE CHAT</span><button class="close-chat-btn" onclick="toggleLiveChat()">×</button></div>
         <div class="chat-messages-box" id="chatBox">
@@ -173,6 +185,7 @@
         </div>
     </div>
 
+    <!-- REGISTER SIGN IN / SIGN UP SYSTEM PROFILE MODAL DECK -->
     <div class="auth-blur-overlay" id="authModal">
         <div class="auth-card-matrix">
             <div class="auth-tab-row">
@@ -212,12 +225,32 @@
         </div>
     </div>
 
+    <!-- ENHANCED YOUTUBE-DIMENSION NAVIGATION SYSTEM BASE BAR -->
     <nav class="app-bottom-navbar">
-        <div class="nav-tab active" id="tab-home" onclick="switchTab('home')"><i class="fas fa-home"></i><span>Home</span></div>
-        <div class="nav-tab" id="tab-shorts" onclick="switchTab('shorts')"><i class="fas fa-bolt"></i><span>Shorts</span></div>
-        <div class="nav-tab" id="tab-space" onclick="switchTab('space')"><i class="fas fa-globe"></i><span>Deep Space</span></div>
-        <div class="nav-tab" id="tab-studio" onclick="switchTab('studio')"><i class="fas fa-square-plus" style="color: #a855f7; font-size: 18px;"></i><span>Create</span></div>
-        <div class="nav-tab" id="tab-wallet" onclick="switchTab('wallet')"><i class="fas fa-wallet"></i><span>Earnings</span></div>
+        <div class="nav-tab active" id="tab-home" onclick="switchTab('home')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-tab" id="tab-shorts" onclick="switchTab('shorts')">
+            <i class="fas fa-bolt"></i>
+            <span>Shorts</span>
+        </div>
+        
+        <!-- Center Action Plus Button Customization Form Matrix -->
+        <div class="nav-tab action-plus-tab" id="tab-studio" onclick="switchTab('studio')">
+            <div class="plus-icon-frame">
+                <i class="fas fa-plus"></i>
+            </div>
+        </div>
+
+        <div class="nav-tab" id="tab-space" onclick="switchTab('space')">
+            <i class="fas fa-globe"></i>
+            <span>Space</span>
+        </div>
+        <div class="nav-tab" id="tab-wallet" onclick="switchTab('wallet')">
+            <i class="fas fa-wallet"></i>
+            <span>Earnings</span>
+        </div>
     </nav>
 
     <div class="matrix-toast" id="toastContainer"></div>
