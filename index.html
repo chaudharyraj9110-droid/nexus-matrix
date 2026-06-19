@@ -3,79 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nexus Stream - Mobile Video Matrix</title>
+    <title>Nexus Stream Ultra Pro - The Ecosystem Matrix</title>
     <link rel="stylesheet" href="matrix-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+    <!-- Global App Top Status Bar -->
     <header class="app-header">
-        <div class="logo-area"><i class="fab fa-youtube" style="color: #ff0000; font-size: 22px;"></i> <span>NEXUS_STREAM</span></div>
+        <div class="logo-area">
+            <i class="fas fa-cube" style="color: #6366f1; animation: spinMatrix 4s linear infinite;"></i> 
+            <span>NEXUS_ULTRA_PRO</span>
+        </div>
         <div class="header-actions">
-            <button class="upload-trigger-btn" onclick="document.getElementById('mobileVideoSelector').click()">
-                <i class="fas fa-camera"></i> Upload
-            </button>
-            <input type="file" id="mobileVideoSelector" accept="video/*" style="display: none;" onchange="playSelectedVideo(event)">
-            <div class="user-avatar">R</div>
+            <div class="wallet-pill-display" onclick="switchTab('wallet')">
+                <i class="fas fa-wallet" style="color: #22c55e;"></i> <span id="headerBalance">$0.00</span>
+            </div>
+            <button class="chat-toggle-btn" onclick="toggleLiveChat()"><i class="fas fa-comments"></i> Chat</button>
         </div>
     </header>
 
-    <div class="video-scroll-container">
-        
-        <section class="main-player-block">
-            <video id="mainVideoNode" controls autoplay muted poster="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800">
-                <source id="videoMediaSource" src="" type="video/mp4">
-                Your mobile browser does not support native video tags.
-            </video>
-            
-            <div class="video-details-card">
-                <h1 id="activeVideoTitle" class="video-display-title">Tap 'Upload' above to play a video from your gallery</h1>
-                <div class="video-metrics-bar">
-                    <span class="view-count">1.4K views • Just now</span>
-                    <div class="video-engagement-buttons">
-                        <button class="action-pill-btn" onclick="handleLike()"><i class="fas fa-thumbs-up"></i> <span id="likeCount">124</span></button>
-                        <button class="action-pill-btn"><i class="fas fa-share"></i> Share</button>
-                        <button class="subscribe-red-btn" id="subBtn" onclick="toggleSubscribe()">SUBSCRIBE</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- MAIN VIEWPORT ROUTER SCREEN SWITCH CONTAINER -->
+    <main class="app-main-body">
 
-        <section class="video-feed-grid">
-            <h3 class="feed-section-heading">Recommended For You</h3>
-            
-            <div class="thumbnail-card" onclick="loadPresetVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', 'Big Buck Bunny Animation Core Short')">
-                <div class="image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500" alt="Thumbnail">
-                    <span class="duration-badge">9:56</span>
-                </div>
-                <div class="card-meta">
-                    <div class="channel-icon">A</div>
-                    <div class="text-meta">
-                        <h4>Big Buck Bunny Animation Core Short</h4>
-                        <p class="channel-title">Blender Foundation Core</p>
-                        <p class="view-subtitle">450K views • 2 days ago</p>
+        <!-- SCREEN MODULE 1: MAIN VIDEO STREAM HOME FEED -->
+        <div id="homeScreen" class="app-screen active">
+            <div class="video-scroll-container">
+                <section class="main-player-block">
+                    <div class="ambient-glow-wrapper active-glow" id="glowCanvasBackdrop">
+                        <video id="mainVideoNode" controls autoplay crossorigin="anonymous" poster="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="eq-visualizer-strip">
+                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                    </div>
+                    
+                    <div class="video-details-card">
+                        <h1 id="activeVideoTitle" class="video-display-title">Big Buck Bunny Animation Core Short</h1>
+                        <div class="interaction-tray">
+                            <button class="action-pill-btn" onclick="handleLike()"><i class="fas fa-heart"></i> <span id="likeCount">842</span></button>
+                            <button class="action-pill-btn" onclick="addNewTimestamp()"><i class="fas fa-bookmark"></i> Pin Time</button>
+                            <button class="subscribe-premium-btn" id="subBtn" onclick="toggleSubscribe()">SUBSCRIBE</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="launchpad-section">
+                    <h3 class="section-title-tag"><i class="fas fa-music"></i> Audio Interaction Soundboard</h3>
+                    <div class="launchpad-grid">
+                        <button class="pad-btn color-red" onclick="playFX('airhorn')">📯 AIRHORN</button>
+                        <button class="pad-btn color-purple" onclick="playFX('bass')">🔮 CYBER BASS</button>
+                        <button class="pad-btn color-blue" onclick="playFX('laser')">⚡ LASER</button>
+                        <button class="pad-btn color-green" onclick="playFX('cheer')">🎉 CHEER</button>
+                    </div>
+                </section>
+
+                <section class="interactive-marker-deck">
+                    <h3 class="section-title-tag"><i class="fas fa-clock"></i> Pinned Narrative Time-Stamps</h3>
+                    <div class="markers-scroll-row" id="markersContainer">
+                        <div class="time-marker-pill" onclick="jumpToTime(0)"><span class="badge-time">00:00</span> <span class="label-text">Media Intro</span></div>
+                        <div class="time-marker-pill" onclick="jumpToTime(15)"><span class="badge-time">00:15</span> <span class="label-text">Visual Drop Scene</span></div>
+                    </div>
+                </section>
+
+                <section class="video-feed-grid">
+                    <h3 class="feed-section-heading">Trending Over the Web</h3>
+                    <div class="thumbnail-card" onclick="loadPresetVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 'Elephants Dream - Open VFX Lab Short')">
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=500">
+                            <span class="duration-badge">14:53</span>
+                        </div>
+                        <div class="card-meta">
+                            <div class="channel-icon" style="background-color: #6366f1;">E</div>
+                            <div class="text-meta"><h4>Elephants Dream - Open VFX Lab Short</h4><p class="channel-title">VFX Lab Studio</p></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- SCREEN MODULE 2: VERTICAL PIP SHORTS ENGINE -->
+        <div id="shortsScreen" class="app-screen">
+            <div class="shorts-vertical-slider">
+                <div class="short-video-container">
+                    <video class="short-video-player" loop muted autoplay playsinline src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"></video>
+                    <div class="short-meta-sidebar">
+                        <div class="sidebar-action" onclick="handleLike()"><i class="fas fa-heart"></i><span>45K</span></div>
+                        <div class="sidebar-action"><i class="fas fa-comment-dots"></i><span>1.2K</span></div>
+                        <div class="sidebar-action" onclick="playFX('laser')"><i class="fas fa-bolt"></i><span>Warp</span></div>
+                    </div>
+                    <div class="short-info-overlay">
+                        <h4>@AlphaCosmos</h4>
+                        <p>Simulating dimensional structural deep collapse engine cycles... #cyber #matrix</p>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- SCREEN MODULE 3: THE PROCEDURAL SPACE MATRIX VIEWPORT -->
+        <div id="spaceScreen" class="app-screen">
+            <div class="space-viewport-container">
+                <canvas id="spaceCanvas"></canvas>
+                <div class="hud-overlay-panel">
+                    <h3>SPACE_MATRIX // PROCEDURAL RENDERING LOOP</h3>
+                    <p>Live canvas audio visualizer rendering continuous loop telemetry profiles.</p>
+                    <div class="hud-btn-row">
+                        <button class="hud-action-btn" id="audioToggleBtn" onclick="toggleSpaceAudio()">⚡ ACTIVATE AUDIO SYNTH</button>
+                        <button class="hud-action-btn" onclick="warpSpeed()">🚀 DEPLOY HYPER WARP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN MODULE 4: STUDIO CREATOR STUDIO INGEST HUB -->
+        <div id="studioScreen" class="app-screen">
+            <div class="studio-workspace-card">
+                <h3><i class="fas fa-video"></i> Media Core Content Ingest Studio</h3>
+                <p class="studio-subtext">Publish new files straight into the platform ecosystem nodes.</p>
+                
+                <div class="drop-zone-box" onclick="document.getElementById('mobileVideoSelector').click()">
+                    <i class="fas fa-cloud-arrow-up" style="font-size: 40px; color: #6366f1; margin-bottom: 12px;"></i>
+                    <p>Tap to select file from gallery</p>
+                    <span class="file-spec-tag">Supports MP4, WebM formats</span>
+                </div>
+
+                <div class="input-form-group">
+                    <label>Broadcast Segment Title</label>
+                    <input type="text" id="uploadTitleInput" placeholder="Enter video stream reference label...">
+                </div>
+
+                <button class="publish-submit-btn" onclick="executeStudioUpload()">🚀 ENCODE AND INGEST STREAM</button>
+            </div>
+        </div>
+
+        <!-- SCREEN MODULE 5: WALLET CREATOR MONETIZATION CENTER -->
+        <div id="walletScreen" class="app-screen">
+            <div class="wallet-dashboard-card">
+                <div class="wallet-title-node">CREATOR REVENUE LEDGER MATRIX</div>
+                <div class="main-balance-hero" id="walletBalanceDisplay">$0.00</div>
+                <p class="balance-sub">Ecosystem Stream Allocation Payout Balance</p>
+                
+                <div class="analytics-mini-grid">
+                    <div class="analytic-metric"><span>CPM Rate</span><strong style="color: #38bdf8;">$14.20</strong></div>
+                    <div class="analytic-metric"><span>Monetized Secs</span><strong id="monetizedTimeDisplay">0s</strong></div>
+                </div>
+
+                <button class="cashout-btn" onclick="triggerCashout()">💸 CLEAR BALANCE OUT TO EXTERNAL BANK</button>
             </div>
 
-            <div class="thumbnail-card" onclick="loadPresetVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 'Elephants Dream - Open Source Studio Test VFX')">
-                <div class="image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=500" alt="Thumbnail">
-                    <span class="duration-badge">14:53</span>
-                </div>
-                <div class="card-meta">
-                    <div class="channel-icon">E</div>
-                    <div class="text-meta">
-                        <h4>Elephants Dream - Open Source Studio Test VFX</h4>
-                        <p class="channel-title">VFX Architecture Lab</p>
-                        <p class="view-subtitle">1.2M views • 1 year ago</p>
-                    </div>
-                </div>
+            <div class="ledger-history-container">
+                <h4>Ecosystem Transaction Node Ledger</h4>
+                <div class="ledger-row"><span>Video view retention bonus</span><span class="plus-funds">+$0.45</span></div>
+                <div class="ledger-row"><span>Audio launchpad tip contribution</span><span class="plus-funds">+$1.20</span></div>
             </div>
-        </section>
+        </div>
+
+    </main>
+
+    <!-- LIVE STREAM SLIDE OVERLAY CHAT DRAWER PANEL -->
+    <div class="live-chat-panel" id="liveChatPanel">
+        <div class="chat-header"><span>🔴 LIVE ECOSYSTEM CONSOLE CHAT</span><button class="close-chat-btn" onclick="toggleLiveChat()">×</button></div>
+        <div class="chat-messages-box" id="chatBox">
+            <div class="chat-line"><span class="user-tag core-user">CyberNinja:</span> Web architecture looks completely stellar! 🔥</div>
+            <div class="chat-line"><span class="user-tag">PixelDev_01:</span> Soundboard overlays working flawlessly on mobile.</div>
+        </div>
+        <div class="chat-input-row">
+            <input type="text" id="chatInputMessage" placeholder="Type message..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+            <button class="send-message-btn" onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
     </div>
 
+    <!-- PERSISTENT APP LOWER SYSTEM TAB NAVIGATION MATRIX BAR -->
+    <nav class="app-bottom-navbar">
+        <div class="nav-tab active" id="tab-home" onclick="switchTab('home')"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-tab" id="tab-shorts" onclick="switchTab('shorts')"><i class="fas fa-bolt"></i><span>Shorts</span></div>
+        <div class="nav-tab" id="tab-space" onclick="switchTab('space')"><i class="fas fa-globe"></i><span>Deep Space</span></div>
+        <div class="nav-tab" id="tab-studio" onclick="switchTab('studio')"><i class="fas fa-square-plus" style="color: #a855f7; font-size: 18px;"></i><span>Create</span></div>
+        <div class="nav-tab" id="tab-wallet" onclick="switchTab('wallet')"><i class="fas fa-wallet"></i><span>Earnings</span></div>
+    </nav>
+
+    <!-- Global App Notification System Alert Toast Overlay -->
     <div class="matrix-toast" id="toastContainer"></div>
 
     <script src="app.js"></script>
