@@ -79,4 +79,20 @@ function deploySmartContract() {
         triggerNotification(`🚀 Broadcaster Success: ${split}% node-split successfully committed to immutable contract!`, 4000, "#10b981");
     }, 1800);
 }
+/**
+ * Processes local binary assets selected from native Android file storage
+ */
+function handleFileLoad(event) {
+    const file = event.target.files[0];
+    const videoPill = document.getElementById("videoPill");
+    
+    if (file) {
+        // Change the box text to show the real file name picked from your phone
+        videoPill.innerText = file.name;
+        videoPill.style.color = "#ffffff"; // Turn text white to match layout
+        
+        // Push a validation alert to the screen layout matrix
+        triggerNotification(`Loaded local asset: ${file.name}`, 2500, "#10b981");
+    }
+}
 
