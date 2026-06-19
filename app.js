@@ -1,5 +1,5 @@
 /**
- * Nexus Stream Ultra Pro - Master Framework Core Core Engine
+ * Nexus Stream Ultra Pro - Social Ecosystem Master Engine Script
  */
 
 let visualizerInterval = null;
@@ -7,7 +7,7 @@ let currentEarningBalance = 0.00;
 let totalMonetizedSeconds = 0;
 let monetizationTimer = null;
 
-// Space Canvas Matrix Engine Global Metrics
+// Space Canvas Matrix Viewport Settings
 let canvas = null, ctx = null;
 let stars = [];
 let maxStars = 150;
@@ -16,32 +16,31 @@ let audioCtx = null;
 let ambientOsc = null;
 let spaceAnimationId = null;
 
+// Authentication Identity Module Global Parameters
+let currentUserIdentity = null;
+
 document.addEventListener("DOMContentLoaded", () => {
     startVisualizerLoop();
     startMonetizationBilling();
     initSpaceMatrixEngine();
 });
 
-// MULTI-SCREEN NAVIGATION APP ROUTER DECK CONTROL ENGINE
+// MAIN APPLICATION ROUTER PLATFORM NAV DECK INTERACTIVE LOGIC
 function switchTab(targetTabId) {
-    // Clear display visibility across all core views
     document.querySelectorAll('.app-screen').forEach(screen => screen.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
 
-    // Enable visibility constraints for target component panels
     document.getElementById(`${targetTabId}Screen`).classList.add('active');
     document.getElementById(`tab-${targetTabId}`).classList.add('active');
     
-    triggerNotification(`Switched screen module instance to: ${targetTabId.toUpperCase()}`);
+    triggerNotification(`Navigating interface core: ${targetTabId.toUpperCase()}`);
 
-    // Pause heavy global media rendering engines if space view is discarded
     if (targetTabId === 'space') {
         startSpaceLoopFrame();
     } else {
         if (spaceAnimationId) cancelAnimationFrame(spaceAnimationId);
     }
 
-    // Toggle short playback instances matching viewport activity layouts
     const shortPlayer = document.querySelector('.short-video-player');
     if (targetTabId === 'shorts') {
         shortPlayer.play();
@@ -59,7 +58,50 @@ function triggerNotification(message, color = "#6366f1") {
     setTimeout(() => { toast.classList.remove("show"); }, 2000);
 }
 
-// REAL-TIME CREATOR WALLET MONETIZATION BILLING SIMULATOR NODES
+// USER ACCREDITATION PROTOCOL MANAGEMENT LOOPS (SIGN IN / SIGN UP)
+function openAuthModal() {
+    document.getElementById("authModal").classList.add("open");
+}
+
+function closeAuthModal() {
+    document.getElementById("authModal").classList.remove("open");
+}
+
+function toggleAuthForm(mode) {
+    document.querySelectorAll(".auth-tab").forEach(btn => btn.classList.remove("active"));
+    document.querySelectorAll(".auth-form-view").forEach(view => view.classList.remove("active"));
+
+    if (mode === 'signin') {
+        document.getElementById("tabSignIn").classList.add("active");
+        document.getElementById("signInFormBlock").classList.add("active");
+    } else {
+        document.getElementById("tabSignUp").classList.add("active");
+        document.getElementById("signUpFormBlock").classList.add("active");
+    }
+}
+
+function handleAuthentication(type) {
+    if (type === 'signin') {
+        const email = document.getElementById("signInEmail").value.trim();
+        if(email === "") { triggerNotification("Identity string entry required.", "#dc2626"); return; }
+        currentUserIdentity = email.split('@')[0];
+    } else {
+        const user = document.getElementById("signUpUser").value.trim();
+        if(user === "") { triggerNotification("Username cannot remain blank.", "#dc2626"); return; }
+        currentUserIdentity = user;
+    }
+
+    // Mutate Avatar Element inside top navigation panel matching parsed credential handles
+    const profileNode = document.getElementById("headerProfileAvatar");
+    profileNode.innerHTML = currentUserIdentity.substring(0,2).toUpperCase();
+    profileNode.style.backgroundColor = "#10b981";
+    profileNode.style.color = "#000000";
+
+    triggerNotification(`Authorized access protocol successfully: Welcome @${currentUserIdentity}`, "#16a34a");
+    closeAuthModal();
+}
+
+// CONTINUOUS CREATOR WALLET ACCRUAL SYSTEM PIXEL PIPELINES
 function startMonetizationBilling() {
     const homePlayer = document.getElementById("mainVideoNode");
     const shortsPlayer = document.querySelector(".short-video-player");
@@ -67,16 +109,13 @@ function startMonetizationBilling() {
     if (monetizationTimer) clearInterval(monetizationTimer);
 
     monetizationTimer = setInterval(() => {
-        // Increment revenue balance if either player context is actively rendering audio/video output frames
         let isHomePlaying = (homePlayer && !homePlayer.paused && !homePlayer.ended);
         let isShortsPlaying = (shortsPlayer && !shortsPlayer.paused && !shortsPlayer.ended && document.getElementById("shortsScreen").classList.contains("active"));
 
         if (isHomePlaying || isShortsPlaying) {
             totalMonetizedSeconds += 1;
-            // Accrue a CPM baseline rate reward balance slice per video run frame interval cycle
-            currentEarningBalance += 0.02;
+            currentEarningBalance += 0.02; // Base yield increment factor
 
-            // Paint metrics fields softly across active layer boards
             document.getElementById("headerBalance").innerText = `$${currentEarningBalance.toFixed(2)}`;
             document.getElementById("walletBalanceDisplay").innerText = `$${currentEarningBalance.toFixed(2)}`;
             document.getElementById("monetizedTimeDisplay").innerText = `${totalMonetizedSeconds}s`;
@@ -89,28 +128,20 @@ function triggerCashout() {
         triggerNotification("Insufficient ledger revenue balance for cashout request.", "#dc2626");
         return;
     }
-    triggerNotification(`Cashout success! Sent $${currentEarningBalance.toFixed(2)} to external accounts.`, "#16a34a");
+    triggerNotification(`Cashout success! Sent $${currentEarningBalance.toFixed(2)} to external account grid.`, "#16a34a");
     currentEarningBalance = 0.00;
     document.getElementById("headerBalance").innerText = `$0.00`;
     document.getElementById("walletBalanceDisplay").innerText = `$0.00`;
 }
 
-// CREATOR WORKSPACE METADATA DECODE HUB LOGIC
+// INGEST CONTROLS CORE INTERNET LOGIC
 function executeStudioUpload() {
     const titleInput = document.getElementById("uploadTitleInput").value.trim();
     const fileSelector = document.getElementById("mobileVideoSelector");
     
-    if (titleInput === "") {
-        triggerNotification("Please enter a media track reference title code.", "#dc2626");
-        return;
-    }
-    
-    if (fileSelector.files.length === 0) {
-        triggerNotification("Please attach an video asset structure block first.", "#dc2626");
-        return;
-    }
+    if (titleInput === "") { triggerNotification("Please enter a media track reference title code.", "#dc2626"); return; }
+    if (fileSelector.files.length === 0) { triggerNotification("Please attach a video asset structure block first.", "#dc2626"); return; }
 
-    // Capture file link source stream references and route variables directly straight to layout pipelines
     const file = fileSelector.files[0];
     const player = document.getElementById("mainVideoNode");
     const titleDisplay = document.getElementById("activeVideoTitle");
@@ -128,7 +159,7 @@ function playSelectedVideo(event) {
     const file = event.target.files[0];
     if (file) {
         document.getElementById("uploadTitleInput").value = file.name.replace(/\.[^/.]+$/, "");
-        triggerNotification("Video file selected. Complete details in Create tab.");
+        triggerNotification("Video mapping detected. Ready to process inside Studio.");
         switchTab('studio');
     }
 }
@@ -140,10 +171,10 @@ function loadPresetVideo(videoUrl, titleText) {
     player.load();
     player.play();
     titleDisplay.innerText = titleText;
-    triggerNotification("Streaming active remote source...");
+    triggerNotification("Streaming active cloud node source thread...");
 }
 
-// HARDWARE WEB AUDIO SYNTH OSCILLATOR SOUNDBOARD LOGIC MATRIX 
+// HARDWARE WEB AUDIO SYNTH MUSIC OVERLAYS INJECTION
 function playFX(type) {
     const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioCtxClass) return;
@@ -176,19 +207,13 @@ function playFX(type) {
         gainNode.gain.exponentialRampToValueAtTime(0.01, timeOffset + 0.8);
         oscNode.start(timeOffset); oscNode.stop(timeOffset + 0.8);
     }
-    triggerNotification(`Dispatched [${type.toUpperCase()}] overlay token to live output mix.`);
+    triggerNotification(`Dispatched sound effect overlay [${type.toUpperCase()}]`);
 }
 
-// PROCEDURAL DEEP SPACE CANVAS RENDERING VECTOR LOOPS SYSTEM
+// CANVAS STARFIELD VISUAL MATRIX INTERFACE VECTOR GENERATION
 function initSpaceMatrixEngine() {
     canvas = document.getElementById("spaceCanvas");
     ctx = canvas.getContext("2d");
-    
-    window.addEventListener('resize', () => {
-        if (canvas && document.getElementById("spaceScreen").classList.contains("active")) {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        }
-    });
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
 
     for (let i = 0; i < maxStars; i++) {
@@ -207,12 +232,10 @@ function startSpaceLoopFrame() {
     function renderFrame() {
         ctx.fillStyle = "rgba(3, 3, 3, 0.2)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-
         let cx = canvas.width / 2, cy = canvas.height / 2;
 
         for (let i = 0; i < maxStars; i++) {
-            let star = stars[i];
-            star.z -= spaceSpeed;
+            let star = stars[i]; star.z -= spaceSpeed;
             if (star.z <= 0) {
                 star.z = canvas.width;
                 star.x = Math.random() * canvas.width - canvas.width / 2;
@@ -234,7 +257,7 @@ function startSpaceLoopFrame() {
 
 function warpSpeed() {
     spaceSpeed = spaceSpeed === 0.4 ? 14 : 0.4;
-    triggerNotification(spaceSpeed > 1 ? "Hyper warp engine tracking locks active" : "Cruising speed structural bounds restored.");
+    triggerNotification(spaceSpeed > 1 ? "Hyper warp vector engine locked" : "Standard space cruise array returned.");
 }
 
 function toggleSpaceAudio() {
@@ -254,23 +277,20 @@ function toggleSpaceAudio() {
     }
 }
 
-// BACKEND SIMULATED GRAPHIC AUDIO EQUALIZER STRIP COMPONENT PIPELINES
+// REPETITIVE SOUND ANALYSIS MOCK ENGINE EQUALIZER LOOPS
 function startVisualizerLoop() {
     const player = document.getElementById("mainVideoNode");
     const bars = document.querySelectorAll(".eq-bar");
-
     setInterval(() => {
         if (player && !player.paused && !player.ended) {
-            bars.forEach(bar => {
-                bar.style.height = `${Math.floor(Math.random() * 14) + 2}px`;
-            });
+            bars.forEach(bar => { bar.style.height = `${Math.floor(Math.random() * 14) + 2}px`; });
         } else {
             bars.forEach(bar => bar.style.height = "2px");
         }
     }, 100);
 }
 
-// SLIDING MENU CHAT CONSOLE HUD SYSTEMS MANAGEMENT MODULES
+// CONSOLE SLIDING LIVE CHAT STREAMS
 function toggleLiveChat() { document.getElementById("liveChatPanel").classList.toggle("open"); }
 function sendChatMessage() {
     const input = document.getElementById("chatInputMessage");
@@ -278,9 +298,9 @@ function sendChatMessage() {
     if (input.value.trim() === "") return;
     const msg = document.createElement("div");
     msg.className = "chat-line";
-    msgLine = `<span class="user-tag core-user">You:</span> ${input.value.trim()}`;
-    msg.innerHTML = msgLine; box.appendChild(msg);
-    input.value = ""; box.scrollTop = box.scrollHeight;
+    let sender = currentUserIdentity ? currentUserIdentity : "GuestNomad";
+    msg.innerHTML = `<span class="user-tag core-user">${sender}:</span> ${input.value.trim()}`;
+    box.appendChild(msg); input.value = ""; box.scrollTop = box.scrollHeight;
 }
 function jumpToTime(s) { const p = document.getElementById("mainVideoNode"); p.currentTime = s; p.play(); }
 function addNewTimestamp() {
@@ -288,7 +308,7 @@ function addNewTimestamp() {
     let sec = Math.floor(p.currentTime);
     const pill = document.createElement("div"); pill.className = "time-marker-pill";
     pill.onclick = () => jumpToTime(sec);
-    pill.innerHTML = `<span class="badge-time">00:${sec.toString().padStart(2, '0')}</span> <span class="label-text">Pinned Snapshot Segment</span>`;
+    pill.innerHTML = `<span class="badge-time">00:${sec.toString().padStart(2, '0')}</span> <span class="label-text">Pinned Milestone Segment</span>`;
     document.getElementById("markersContainer").appendChild(pill);
 }
 function handleLike() { document.getElementById("likeCount").innerText = parseInt(document.getElementById("likeCount").innerText) + 1; }
