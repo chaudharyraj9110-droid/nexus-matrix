@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nexus Mobile Matrix</title>
+    <link rel="stylesheet" href="matrix-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="matrix-header">
+        <div class="brand-signature">NEXUS // MOB_CORE</div>
+        <div class="ledger-wallet" id="walletDisplay"><i class="fas fa-wallet"></i> 1.284 ETH</div>
+    </header>
+
+    <div class="workspace-viewport">
+        
+        <main class="constructor-shield">
+            <div class="section-title">
+                <h2><i class="fas fa-cubes"></i> Multi-Track Element</h2>
+                <span class="protection-badge" id="protectionBadge"><i class="fas fa-gavel"></i> Safe Mode</span>
+            </div>
+            
+            <div class="sandbox-render-frame">
+                <div class="active-canvas-container">
+                    <div class="ai-privacy-shield" id="privacyShield"><i class="fas fa-eye-slash"></i> AI Blur Active</div>
+                    <div class="media-placeholder-node" id="visualNode">
+                        <i class="fas fa-project-diagram matrix-pulse"></i>
+                        <p>CONTAINER ACTIVE</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lane-matrix">
+                <div class="media-lane" id="laneVideo">
+                    <div class="lane-meta"><i class="fas fa-file-video"></i> Video Asset</div>
+                    <div class="asset-pill">quantum_sim.mp4</div>
+                    <button class="lane-action-btn" onclick="toggleTrack('video')"><i class="fas fa-eye"></i></button>
+                </div>
+                <div class="media-lane" id="laneVoice">
+                    <div class="lane-meta"><i class="fas fa-microphone-alt"></i> Voice Track</div>
+                    <div class="asset-pill">voiceover.wav</div>
+                    <button class="lane-action-btn" onclick="toggleTrack('voice')"><i class="fas fa-volume-up"></i></button>
+                </div>
+                <div class="media-lane protected-lane" id="laneAudio">
+                    <div class="lane-meta"><i class="fas fa-wave-square"></i> Audio Mesh</div>
+                    <div class="asset-pill" id="audioPill">synth_mesh.mp3</div>
+                    <button class="lane-action-btn context-trigger" onclick="simulateCopyrightStrike()"><i class="fas fa-triangle-exclamation"></i> Claim Test</button>
+                </div>
+            </div>
+        </main>
+
+        <aside class="ai-processing-tower">
+            <section class="automation-card">
+                <h3><i class="fas fa-robot"></i> AI Sanitation Engine</h3>
+                <p class="subtitle-text">Manage real-time automated asset cleanup profiles.</p>
+                
+                <div class="control-row">
+                    <label>Strip Vocal Filler Words</label>
+                    <label class="matrix-switch">
+                        <input type="checkbox" id="fillerWordsToggle" checked>
+                        <span class="matrix-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="control-row">
+                    <label>AI Dub Localization</label>
+                    <select class="matrix-dropdown" id="vocalTranslation">
+                        <option value="jp">Japanese (AI Dub)</option>
+                        <option value="es">Spanish (AI Dub)</option>
+                        <option value="de">German (AI Dub)</option>
+                    </select>
+                </div>
+
+                <div class="control-row">
+                    <label>Privacy Blur Protection</label>
+                    <label class="matrix-switch">
+                        <input type="checkbox" id="privacyShieldToggle" checked>
+                        <span class="matrix-slider"></span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="automation-card contract-card-accent">
+                <h3><i class="fas fa-scroll"></i> Immutable Ledger</h3>
+                <p class="subtitle-text">Programmatic revenue splitting directly on-chain.</p>
+                
+                <div class="split-form-row">
+                    <input type="text" id="walletAddress" placeholder="Target Wallet Hash (0x...)" class="matrix-input field-hash">
+                    <input type="number" id="splitPercentage" placeholder="50" class="matrix-input field-percentage" min="1" max="100">%
+                </div>
+                
+                <button class="action-btn-neon" onclick="deploySmartContract()">Authorize & Deploy Split</button>
+            </section>
+        </aside>
+    </div>
+
+    <div class="matrix-toast" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
