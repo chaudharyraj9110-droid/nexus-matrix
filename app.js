@@ -1,5 +1,5 @@
 /**
- * Nexus Stream Ultra Pro - Social Ecosystem Master Engine Script
+ * Nexus Stream Ultra Pro - Platform Core Engine Script Layer
  */
 
 let visualizerInterval = null;
@@ -7,7 +7,7 @@ let currentEarningBalance = 0.00;
 let totalMonetizedSeconds = 0;
 let monetizationTimer = null;
 
-// Space Canvas Matrix Viewport Settings
+// Deep Space Procedural Array Engine State Context
 let canvas = null, ctx = null;
 let stars = [];
 let maxStars = 150;
@@ -16,7 +16,7 @@ let audioCtx = null;
 let ambientOsc = null;
 let spaceAnimationId = null;
 
-// Authentication Identity Module Global Parameters
+// Identity Context
 let currentUserIdentity = null;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initSpaceMatrixEngine();
 });
 
-// MAIN APPLICATION ROUTER PLATFORM NAV DECK INTERACTIVE LOGIC
+// ROUTING INDEX CONTROLLER MATRIX
 function switchTab(targetTabId) {
     document.querySelectorAll('.app-screen').forEach(screen => screen.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
@@ -33,8 +33,6 @@ function switchTab(targetTabId) {
     document.getElementById(`${targetTabId}Screen`).classList.add('active');
     document.getElementById(`tab-${targetTabId}`).classList.add('active');
     
-    triggerNotification(`Navigating interface core: ${targetTabId.toUpperCase()}`);
-
     if (targetTabId === 'space') {
         startSpaceLoopFrame();
     } else {
@@ -49,7 +47,7 @@ function switchTab(targetTabId) {
     }
 }
 
-function triggerNotification(message, color = "#6366f1") {
+function triggerNotification(message, color = "#ef4444") {
     const toast = document.getElementById("toastContainer");
     if (!toast) return;
     toast.innerText = message;
@@ -58,14 +56,9 @@ function triggerNotification(message, color = "#6366f1") {
     setTimeout(() => { toast.classList.remove("show"); }, 2000);
 }
 
-// USER ACCREDITATION PROTOCOL MANAGEMENT LOOPS (SIGN IN / SIGN UP)
-function openAuthModal() {
-    document.getElementById("authModal").classList.add("open");
-}
-
-function closeAuthModal() {
-    document.getElementById("authModal").classList.remove("open");
-}
+// USER CREDENTIAL INTERACTIVE HANDLING NODES
+function openAuthModal() { document.getElementById("authModal").classList.add("open"); }
+function closeAuthModal() { document.getElementById("authModal").classList.remove("open"); }
 
 function toggleAuthForm(mode) {
     document.querySelectorAll(".auth-tab").forEach(btn => btn.classList.remove("active"));
@@ -83,25 +76,24 @@ function toggleAuthForm(mode) {
 function handleAuthentication(type) {
     if (type === 'signin') {
         const email = document.getElementById("signInEmail").value.trim();
-        if(email === "") { triggerNotification("Identity string entry required.", "#dc2626"); return; }
+        if(email === "") { triggerNotification("Credentials verification string error.", "#cc0000"); return; }
         currentUserIdentity = email.split('@')[0];
     } else {
         const user = document.getElementById("signUpUser").value.trim();
-        if(user === "") { triggerNotification("Username cannot remain blank.", "#dc2626"); return; }
+        if(user === "") { triggerNotification("Profile name mapping required.", "#cc0000"); return; }
         currentUserIdentity = user;
     }
 
-    // Mutate Avatar Element inside top navigation panel matching parsed credential handles
     const profileNode = document.getElementById("headerProfileAvatar");
     profileNode.innerHTML = currentUserIdentity.substring(0,2).toUpperCase();
-    profileNode.style.backgroundColor = "#10b981";
-    profileNode.style.color = "#000000";
+    profileNode.style.backgroundColor = "#ef4444";
+    profileNode.style.fontWeight = "bold";
 
-    triggerNotification(`Authorized access protocol successfully: Welcome @${currentUserIdentity}`, "#16a34a");
+    triggerNotification(`Authorized access verified: Welcome @${currentUserIdentity}`, "#22c55e");
     closeAuthModal();
 }
 
-// CONTINUOUS CREATOR WALLET ACCRUAL SYSTEM PIXEL PIPELINES
+// CONTINUOUS AD-REVENUE BALANCING ACCOUNTABILITY TELEMETRY
 function startMonetizationBilling() {
     const homePlayer = document.getElementById("mainVideoNode");
     const shortsPlayer = document.querySelector(".short-video-player");
@@ -114,7 +106,7 @@ function startMonetizationBilling() {
 
         if (isHomePlaying || isShortsPlaying) {
             totalMonetizedSeconds += 1;
-            currentEarningBalance += 0.02; // Base yield increment factor
+            currentEarningBalance += 0.02;
 
             document.getElementById("headerBalance").innerText = `$${currentEarningBalance.toFixed(2)}`;
             document.getElementById("walletBalanceDisplay").innerText = `$${currentEarningBalance.toFixed(2)}`;
@@ -125,22 +117,22 @@ function startMonetizationBilling() {
 
 function triggerCashout() {
     if (currentEarningBalance <= 0) {
-        triggerNotification("Insufficient ledger revenue balance for cashout request.", "#dc2626");
+        triggerNotification("No current balance available inside selected ledger node asset arrays.", "#cc0000");
         return;
     }
-    triggerNotification(`Cashout success! Sent $${currentEarningBalance.toFixed(2)} to external account grid.`, "#16a34a");
+    triggerNotification(`Revenue withdrawal execution cleared: $${currentEarningBalance.toFixed(2)} sent!`, "#22c55e");
     currentEarningBalance = 0.00;
     document.getElementById("headerBalance").innerText = `$0.00`;
     document.getElementById("walletBalanceDisplay").innerText = `$0.00`;
 }
 
-// INGEST CONTROLS CORE INTERNET LOGIC
+// MEDIA CONTENT FILE INGEST CONTROLS
 function executeStudioUpload() {
     const titleInput = document.getElementById("uploadTitleInput").value.trim();
     const fileSelector = document.getElementById("mobileVideoSelector");
     
-    if (titleInput === "") { triggerNotification("Please enter a media track reference title code.", "#dc2626"); return; }
-    if (fileSelector.files.length === 0) { triggerNotification("Please attach a video asset structure block first.", "#dc2626"); return; }
+    if (titleInput === "") { triggerNotification("Please provide an ingestion title label.", "#cc0000"); return; }
+    if (fileSelector.files.length === 0) { triggerNotification("Missing file asset source target map.", "#cc0000"); return; }
 
     const file = fileSelector.files[0];
     const player = document.getElementById("mainVideoNode");
@@ -150,7 +142,7 @@ function executeStudioUpload() {
     player.load();
     titleDisplay.innerText = titleInput;
 
-    triggerNotification("Asset successfully ingested into Home Screen feed layer!", "#16a34a");
+    triggerNotification("Segment ingested into active broadcast loops successfully!", "#22c55e");
     switchTab('home');
     player.play();
 }
@@ -159,7 +151,7 @@ function playSelectedVideo(event) {
     const file = event.target.files[0];
     if (file) {
         document.getElementById("uploadTitleInput").value = file.name.replace(/\.[^/.]+$/, "");
-        triggerNotification("Video mapping detected. Ready to process inside Studio.");
+        triggerNotification("Video link mapped. Adjust parameters inside Studio node layout.");
         switchTab('studio');
     }
 }
@@ -171,14 +163,13 @@ function loadPresetVideo(videoUrl, titleText) {
     player.load();
     player.play();
     titleDisplay.innerText = titleText;
-    triggerNotification("Streaming active cloud node source thread...");
 }
 
-// HARDWARE WEB AUDIO SYNTH MUSIC OVERLAYS INJECTION
+// CLIENT-SIDE HARDWARE WEB AUDIO API FX MATRIX GENERATOR
 function playFX(type) {
-    const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtxClass) return;
-    const ctxInstance = new AudioCtxClass();
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    const ctxInstance = new AudioContextClass();
     
     const oscNode = ctxInstance.createOscillator();
     const gainNode = ctxInstance.createGain();
@@ -207,10 +198,9 @@ function playFX(type) {
         gainNode.gain.exponentialRampToValueAtTime(0.01, timeOffset + 0.8);
         oscNode.start(timeOffset); oscNode.stop(timeOffset + 0.8);
     }
-    triggerNotification(`Dispatched sound effect overlay [${type.toUpperCase()}]`);
 }
 
-// CANVAS STARFIELD VISUAL MATRIX INTERFACE VECTOR GENERATION
+// CANVAS STARFIELD GENERATOR
 function initSpaceMatrixEngine() {
     canvas = document.getElementById("spaceCanvas");
     ctx = canvas.getContext("2d");
@@ -221,7 +211,7 @@ function initSpaceMatrixEngine() {
             x: Math.random() * canvas.width - canvas.width / 2,
             y: Math.random() * canvas.height - canvas.height / 2,
             z: Math.random() * canvas.width,
-            color: ['#ffffff', '#818cf8', '#c084fc', '#f43f5e'][Math.floor(Math.random() * 4)]
+            color: ['#ffffff', '#3ea6ff', '#f43f5e', '#22c55e'][Math.floor(Math.random() * 4)]
         });
     }
 }
@@ -230,7 +220,7 @@ function startSpaceLoopFrame() {
     if (spaceAnimationId) cancelAnimationFrame(spaceAnimationId);
     
     function renderFrame() {
-        ctx.fillStyle = "rgba(3, 3, 3, 0.2)";
+        ctx.fillStyle = "rgba(15, 15, 15, 0.2)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         let cx = canvas.width / 2, cy = canvas.height / 2;
 
@@ -257,7 +247,7 @@ function startSpaceLoopFrame() {
 
 function warpSpeed() {
     spaceSpeed = spaceSpeed === 0.4 ? 14 : 0.4;
-    triggerNotification(spaceSpeed > 1 ? "Hyper warp vector engine locked" : "Standard space cruise array returned.");
+    triggerNotification(spaceSpeed > 1 ? "Hyper-warp engine locked" : "Cruising speed resumed.");
 }
 
 function toggleSpaceAudio() {
@@ -277,27 +267,26 @@ function toggleSpaceAudio() {
     }
 }
 
-// REPETITIVE SOUND ANALYSIS MOCK ENGINE EQUALIZER LOOPS
+// FIXED SOUND EQUALIZER MOCK ANALYSIS LOOP
 function startVisualizerLoop() {
     const player = document.getElementById("mainVideoNode");
     const bars = document.querySelectorAll(".eq-bar");
     setInterval(() => {
         if (player && !player.paused && !player.ended) {
-            bars.forEach(bar => { bar.style.height = `${Math.floor(Math.random() * 14) + 2}px`; });
+            bars.forEach(bar => { bar.style.height = `${Math.floor(Math.random() * 15) + 2}px`; });
         } else {
             bars.forEach(bar => bar.style.height = "2px");
         }
     }, 100);
 }
 
-// CONSOLE SLIDING LIVE CHAT STREAMS
+// LIVE CONSOLE CHAT DECK INTERACTION INTERFACE
 function toggleLiveChat() { document.getElementById("liveChatPanel").classList.toggle("open"); }
 function sendChatMessage() {
     const input = document.getElementById("chatInputMessage");
     const box = document.getElementById("chatBox");
     if (input.value.trim() === "") return;
-    const msg = document.createElement("div");
-    msg.className = "chat-line";
+    const msg = document.createElement("div"); msg.className = "chat-line";
     let sender = currentUserIdentity ? currentUserIdentity : "GuestNomad";
     msg.innerHTML = `<span class="user-tag core-user">${sender}:</span> ${input.value.trim()}`;
     box.appendChild(msg); input.value = ""; box.scrollTop = box.scrollHeight;
