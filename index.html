@@ -3,258 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nexus Stream Ultra Pro</title>
-    <link rel="stylesheet" href="matrix-style.css">
+    <title>Nexus Anti-Algorithmic Media System</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- TOP HEADER LAYER -->
+    <!-- CONTROL HEADER & COMMAND SEARCH HUB -->
     <header class="app-header">
-        <div class="logo-area">
-            <i class="fab fa-youtube" style="color: #ef4444; font-size: 22px;"></i> 
-            <span>NEXUS_STREAM</span>
+        <div class="logo-area" onclick="switchTab('home')">
+            <i class="fas fa-filter-circle-dollar" style="color: #10b981; font-size: 20px;"></i>
+            <span>NEXUS_DECK</span>
         </div>
-        <div class="header-actions">
-            <div class="wallet-pill-display" onclick="switchTab('wallet')">
-                <i class="fas fa-wallet" style="color: #22c55e;"></i> <span id="headerBalance">$0.00</span>
+        
+        <!-- Anti-YouTube Command Search Center -->
+        <div class="search-command-center">
+            <div class="search-bar-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="globalSearchInput" placeholder="Filter platform... (use -keyword to exclude)" onkeydown="if(event.key==='Enter') executeCommandSearch()">
+                <button class="clear-search-btn" onclick="resetSearchEngine()">&times;</button>
             </div>
-            <button class="chat-toggle-btn" onclick="toggleLiveChat()"><i class="fas fa-comments"></i> Chat</button>
-            <div class="user-profile-node" id="headerProfileAvatar" onclick="openAuthModal()">
-                <i class="fas fa-user"></i>
+            <div class="search-scope-toggle" id="searchScopeScope" onclick="toggleSearchScope()" title="Toggle Scope: Global Network vs Local Library">
+                <i class="fas fa-globe"></i> <span>GLOBAL</span>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-notification-btn" onclick="triggerNotification('Ecosystem online. Zero trackers attached.')">
+                <i class="fas fa-shield-halved" style="color: #10b981;"></i>
+            </button>
+            <div class="user-profile-node" id="headerProfileAvatar" onclick="switchTab('settings')">
+                <i class="fas fa-sliders"></i>
             </div>
         </div>
     </header>
 
-    <!-- CONTENT SCREEN ROUTER SWITCH PANELS -->
+    <!-- CONTENT VIEW PORT ROUTER -->
     <main class="app-main-body">
 
-        <!-- SCREEN 1: YOUTUBE HOME TYPOLOGY VIEWPORT -->
+        <!-- TAB 1: CHRONOLOGICAL FEED & WORKSPACES -->
         <div id="homeScreen" class="app-screen active">
-            <div class="video-scroll-container">
-                <section class="main-player-block">
-                    <div class="ambient-glow-wrapper active-glow" id="glowCanvasBackdrop">
-                        <video id="mainVideoNode" controls autoplay crossorigin="anonymous" poster="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800">
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                        </video>
+            <div class="view-scroll-container">
+                
+                <!-- Instagram-Style Custom Quick Channel Aggregators -->
+                <div class="instagram-stories-strip">
+                    <div class="story-ring active" onclick="loadPresetVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 'VFX Lab: Elephants Dream Special')">
+                        <div class="story-avatar" style="background: #3b82f6;">VFX</div>
+                        <span>VFX Lab</span>
                     </div>
+                    <div class="story-ring active" onclick="loadPresetVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', 'Blaze Tech: Hardware Infrastructure Overview')">
+                        <div class="story-avatar" style="background: #ec4899;">BT</div>
+                        <span>BlazeTech</span>
+                    </div>
+                    <div class="story-ring" onclick="triggerNotification('No active unread updates from @QuantumDev.')">
+                        <div class="story-avatar" style="background: #10b981;">QD</div>
+                        <span>Quantum</span>
+                    </div>
+                </div>
 
-                    <!-- Ambient Equalizer Strip Layer -->
-                    <div class="eq-visualizer-strip">
-                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-                    </div>
+                <!-- Primary Active Video Player Structural Layout Block -->
+                <section class="main-player-block">
+                    <video id="mainVideoNode" controls autoplay crossorigin="anonymous" poster="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    </video>
                     
                     <div class="video-details-card">
-                        <h1 id="activeVideoTitle" class="video-display-title">Big Buck Bunny Animation Core Short</h1>
+                        <h1 id="activeVideoTitle" class="video-display-title">Big Buck Bunny Production Open Animation Source</h1>
                         <div class="interaction-tray">
-                            <button class="action-pill-btn" onclick="handleLike()"><i class="fas fa-thumbs-up"></i> <span id="likeCount">842</span></button>
-                            <button class="action-pill-btn" onclick="addNewTimestamp()"><i class="fas fa-bookmark"></i> Pin Time</button>
-                            <button class="subscribe-premium-btn" id="subBtn" onclick="toggleSubscribe()">SUBSCRIBE</button>
+                            <button class="action-pill-btn" onclick="toggleIncognitoMode()"><i class="fas fa-eye-slash" id="incognitoIcon"></i> <span id="incognitoTxt">Standard Session</span></button>
+                            <button class="action-pill-btn" onclick="addNewTimestamp()"><i class="fas fa-thumbtack"></i> Tag Marker</button>
+                            <button class="subscribe-premium-btn" id="subBtn" onclick="toggleSubscribe()">FOLLOW CHRONOLOGICALLY</button>
                         </div>
                     </div>
                 </section>
 
-                <!-- Audio Low-Latency FX Interactive Soundboard Launcher Node -->
-                <section class="launchpad-section">
-                    <h3 class="section-title-tag"><i class="fas fa-music"></i> Audio Interaction Soundboard</h3>
-                    <div class="launchpad-grid">
-                        <button class="pad-btn color-red" onclick="playFX('airhorn')">📯 AIRHORN</button>
-                        <button class="pad-btn color-purple" onclick="playFX('bass')">🔮 CYBER BASS</button>
-                        <button class="pad-btn color-blue" onclick="playFX('laser')">⚡ LASER</button>
-                        <button class="pad-btn color-green" onclick="playFX('cheer')">🎉 CHEER</button>
-                    </div>
-                </section>
-
-                <!-- Pinned Timeline Anchor Navigation Metrics -->
-                <section class="interactive-marker-deck">
-                    <h3 class="section-title-tag"><i class="fas fa-clock"></i> Pinned Narrative Time-Stamps</h3>
-                    <div class="markers-scroll-row" id="markersContainer">
-                        <div class="time-marker-pill" onclick="jumpToTime(0)"><span class="badge-time">00:00</span> <span class="label-text">Media Intro</span></div>
-                        <div class="time-marker-pill" onclick="jumpToTime(15)"><span class="badge-time">00:15</span> <span class="label-text">Visual Drop Scene</span></div>
-                    </div>
-                </section>
-
-                <!-- Feed Grid Recommendations Row -->
-                <section class="video-feed-grid">
-                    <h3 class="feed-section-heading">Trending Over the Web</h3>
-                    <div class="thumbnail-card" onclick="loadPresetVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 'Elephants Dream - Open VFX Lab Short')">
-                        <div class="image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=500">
-                            <span class="duration-badge">14:53</span>
-                        </div>
-                        <div class="card-meta">
-                            <div class="channel-icon" style="background-color: #6366f1;">E</div>
-                            <div class="text-meta"><h4>Elephants Dream - Open VFX Lab Short</h4><p class="channel-title">VFX Lab Studio</p></div>
-                        </div>
-                    </div>
+                <!-- Chronological Independent Video List Grid -->
+                <section class="video-feed-grid" id="mainVideoFeedGrid">
+                    <h3 class="feed-section-heading">Chronological Network Log (No Recommendations)</h3>
+                    <!-- Dynamically populated inside search.js -->
                 </section>
             </div>
         </div>
 
-        <!-- SCREEN 2: VERTICAL SHORTS SNAPPING MATRIX WINDOW -->
+        <!-- TAB 2: AUTOPLAY VERTICAL REELS CONTROL PANEL -->
         <div id="shortsScreen" class="app-screen">
             <div class="shorts-vertical-slider">
                 <div class="short-video-container">
                     <video class="short-video-player" loop muted autoplay playsinline src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"></video>
                     <div class="short-meta-sidebar">
-                        <div class="sidebar-action" onclick="handleLike()"><i class="fas fa-thumbs-up"></i><span>45K</span></div>
-                        <div class="sidebar-action"><i class="fas fa-comment"></i><span>1.2K</span></div>
-                        <div class="sidebar-action" onclick="playFX('laser')"><i class="fas fa-share"></i><span>Warp</span></div>
+                        <div class="sidebar-action" onclick="triggerNotification('Segment indexed.')"><i class="fas fa-bookmark"></i><span>Save</span></div>
+                        <div class="sidebar-action" onclick="triggerNotification('Audio extracted.')"><i class="fas fa-music"></i><span>Audio</span></div>
                     </div>
                     <div class="short-info-overlay">
-                        <h4>@AlphaCosmos</h4>
-                        <p>Simulating dimensional structural deep collapse engine cycles... #cyber #matrix</p>
+                        <h4>@AlphaHardwareLog</h4>
+                        <p>Realtime clean telemetry validation cycles... #openhardware</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SCREEN 3: CREATION INPUT INGEST CORE -->
+        <!-- TAB 3: LOCAL CONTENT UPLOAD CONTROL LAYOUT -->
         <div id="studioScreen" class="app-screen">
             <div class="studio-workspace-card">
-                <h3><i class="fas fa-video"></i> Create Center Ingest Studio</h3>
-                <p class="studio-subtext">Publish new files straight into the platform ecosystem nodes.</p>
+                <h3><i class="fas fa-folder-plus"></i> Ingest Control Deck</h3>
+                <p class="studio-subtext">Insert local storage arrays into your sandbox interface environment manually.</p>
                 
                 <div class="drop-zone-box" onclick="document.getElementById('mobileVideoSelector').click()">
-                    <i class="fas fa-cloud-arrow-up" style="font-size: 40px; color: #ef4444; margin-bottom: 12px;"></i>
-                    <p>Tap to select file from gallery</p>
-                    <span class="file-spec-tag">Supports MP4, WebM formats</span>
+                    <i class="fas fa-terminal" style="font-size: 32px; color: #10b981; margin-bottom: 12px;"></i>
+                    <p>Map local media package stream</p>
+                    <span class="file-spec-tag">Accepts standard video formats</span>
                 </div>
                 <input type="file" id="mobileVideoSelector" accept="video/*" style="display: none;" onchange="playSelectedVideo(event)">
 
                 <div class="input-form-group">
-                    <label>Broadcast Segment Title</label>
-                    <input type="text" id="uploadTitleInput" placeholder="Enter video stream reference label...">
+                    <label>Assigned Interface Label Metadata</label>
+                    <input type="text" id="uploadTitleInput" placeholder="Define custom title text...">
                 </div>
 
-                <button class="publish-submit-btn" onclick="executeStudioUpload()">🚀 ENCODE AND INGEST STREAM</button>
+                <button class="publish-submit-btn" onclick="executeStudioUpload()">🚀 MOUNT ASSET INTO SANDBOX</button>
             </div>
         </div>
 
-        <!-- SCREEN 4: DEEP SPACE MATRIX CANVAS VIEWPORT -->
-        <div id="spaceScreen" class="app-screen">
-            <div class="space-viewport-container">
-                <canvas id="spaceCanvas"></canvas>
-                <div class="hud-overlay-panel">
-                    <h3>SPACE_MATRIX // PROCEDURAL RENDERING LOOP</h3>
-                    <p>Live canvas audio visualizer rendering continuous loop telemetry profiles.</p>
-                    <div class="hud-btn-row">
-                        <button class="hud-action-btn" id="audioToggleBtn" onclick="toggleSpaceAudio()">⚡ ACTIVATE AUDIO SYNTH</button>
-                        <button class="hud-action-btn" onclick="warpSpeed()">🚀 DEPLOY HYPER WARP</button>
+        <!-- TAB 4: ANTI-ALGORITHMIC MEMORY BANK HISTORY DECK -->
+        <div id="historyScreen" class="app-screen">
+            <div class="history-dashboard-header">
+                <h3><i class="fas fa-database"></i> The History Memory Bank</h3>
+                <p>Your search logs and tracking logs are stored locally. They are never transmitted or processed by automated recommendation structures.</p>
+                
+                <div class="history-action-row">
+                    <button class="history-control-btn" onclick="clearAllHistory()"><i class="fas fa-trash-can"></i> WIPE REGISTER</button>
+                    <button class="history-control-btn" onclick="createNewSessionBundle()"><i class="fas fa-folder-plus"></i> BUNDLE CURRENT VIEW SESSIONS</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Session Folders Stack Container -->
+            <div class="history-sessions-wrapper" id="historySessionsContainer">
+                <!-- Dynamically populated inside history.js -->
+            </div>
+        </div>
+
+        <!-- TAB 5: ARCHITECTURE ENGINE PREFERENCES DECK -->
+        <div id="settingsScreen" class="app-screen">
+            <div class="settings-layout-container">
+                <h3><i class="fas fa-sliders"></i> Interface Layout Preferences</h3>
+                <p class="settings-subtext">Completely restructure your application layout engine parameters below.</p>
+
+                <!-- Section 1: Modular Interface Switches -->
+                <div class="settings-group-card">
+                    <h4>Modular Layout Switches</h4>
+                    <div class="toggle-control-row">
+                        <div class="toggle-meta">
+                            <strong>Shorts Tab Render</strong>
+                            <p>Enable or remove the vertical video player framework.</p>
+                        </div>
+                        <label class="switch-ui-box">
+                            <input type="checkbox" id="settingToggleShorts" checked onchange="applyInterfaceConfiguration()">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-control-row">
+                        <div class="toggle-meta">
+                            <strong>Quick Channel Strips</strong>
+                            <p>Display or hide Instagram-style notification circle arrays at top of page.</p>
+                        </div>
+                        <label class="switch-ui-box">
+                            <input type="checkbox" id="settingToggleStories" checked onchange="applyInterfaceConfiguration()">
+                            <span class="switch-slider"></span>
+                        </label>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- SCREEN 5: LEDGER WALLET EARNINGS CONSOLE -->
-        <div id="walletScreen" class="app-screen">
-            <div class="wallet-dashboard-card">
-                <div class="wallet-title-node">CREATOR REVENUE LEDGER MATRIX</div>
-                <div class="main-balance-hero" id="walletBalanceDisplay">$0.00</div>
-                <p class="balance-sub">Ecosystem Stream Allocation Payout Balance</p>
-                
-                <div class="analytics-mini-grid">
-                    <div class="analytic-metric"><span>CPM Rate</span><strong style="color: #38bdf8;">$14.20</strong></div>
-                    <div class="analytic-metric"><span>Monetized Secs</span><strong id="monetizedTimeDisplay">0s</strong></div>
+                <!-- Section 2: Strict Audio / Network Data Restrictions -->
+                <div class="settings-group-card">
+                    <h4>Ecosystem Data Restraints</h4>
+                    <div class="toggle-control-row">
+                        <div class="toggle-meta">
+                            <strong>Forced Audio-Only Pipelines</strong>
+                            <p>Saves 90% bandwidth by cutting out pixel raster tracks completely.</p>
+                        </div>
+                        <label class="switch-ui-box">
+                            <input type="checkbox" id="settingAudioOnly" onchange="applyInterfaceConfiguration()">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-control-row">
+                        <div class="toggle-meta">
+                            <strong>Lock Fixed Resolution Limits</strong>
+                            <p>Prevents dynamic quality adjustments based on external network metrics.</p>
+                        </div>
+                        <select class="settings-dropdown" id="settingResolution" onchange="applyInterfaceConfiguration()">
+                            <option value="auto">Dynamic Detection</option>
+                            <option value="1080p">Fixed 1080p Core</option>
+                            <option value="720p">Fixed 720p Balanced</option>
+                            <option value="360p">Fixed 360p Data Saver</option>
+                        </select>
+                    </div>
                 </div>
 
-                <button class="cashout-btn" onclick="triggerCashout()">💸 CLEAR BALANCE OUT TO EXTERNAL BANK</button>
-            </div>
+                <!-- Section 3: Daily Digital Self-Imposed Limits Controls -->
+                <div class="settings-group-card">
+                    <h4>Self-Imposed Viewing Budgets</h4>
+                    <div class="toggle-control-row">
+                        <div class="toggle-meta">
+                            <strong>Daily Hard-Lock Cap Limit</strong>
+                            <p>Enforces grayscale system renders when viewing thresholds are met.</p>
+                        </div>
+                        <select class="settings-dropdown" id="settingTimeBudget" onchange="applyInterfaceConfiguration()">
+                            <option value="none">No System Cap</option>
+                            <option value="15">15 Minutes Per Day</option>
+                            <option value="60">1 Hour Per Day</option>
+                        </select>
+                    </div>
+                </div>
 
-            <div class="ledger-history-container">
-                <h4>Ecosystem Transaction Node Ledger</h4>
-                <div class="ledger-row"><span>Video view retention bonus</span><span class="plus-funds">+$0.45</span></div>
-                <div class="ledger-row"><span>Audio launchpad tip contribution</span><span class="plus-funds">+$1.20</span></div>
+                <div style="padding: 10px; text-align: center; font-size: 11px; color: var(--text-dark-muted);">
+                    Nexus Core Operational Layer Build v4.2.0-Local
+                </div>
             </div>
         </div>
 
     </main>
 
-    <!-- SLIDING ACCESS CHAT DRAWER PANEL OVERLAY -->
-    <div class="live-chat-panel" id="liveChatPanel">
-        <div class="chat-header"><span>🔴 LIVE ECOSYSTEM CONSOLE CHAT</span><button class="close-chat-btn" onclick="toggleLiveChat()">×</button></div>
-        <div class="chat-messages-box" id="chatBox">
-            <div class="chat-line"><span class="user-tag core-user">CyberNinja:</span> Web architecture looks completely stellar! 🔥</div>
-            <div class="chat-line"><span class="user-tag">PixelDev_01:</span> Soundboard overlays working flawlessly on mobile.</div>
-        </div>
-        <div class="chat-input-row">
-            <input type="text" id="chatInputMessage" placeholder="Type message..." onkeydown="if(event.key==='Enter') sendChatMessage()">
-            <button class="send-message-btn" onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
-
-    <!-- REGISTER SIGN IN / SIGN UP SYSTEM PROFILE MODAL DECK -->
-    <div class="auth-blur-overlay" id="authModal">
-        <div class="auth-card-matrix">
-            <div class="auth-tab-row">
-                <button class="auth-tab active" id="tabSignIn" onclick="toggleAuthForm('signin')">SIGN IN</button>
-                <button class="auth-tab" id="tabSignUp" onclick="toggleAuthForm('signup')">CREATE ACCOUNT</button>
-            </div>
-            
-            <div class="auth-form-view active" id="signInFormBlock">
-                <div class="input-form-group">
-                    <label>Identity Handle (Email or Profile Tag)</label>
-                    <input type="email" id="signInEmail" placeholder="user@nexus.matrix">
-                </div>
-                <div class="input-form-group">
-                    <label>Security Access Code</label>
-                    <input type="password" id="signInPass" placeholder="••••••••">
-                </div>
-                <button class="publish-submit-btn" style="background:#10b981;" onclick="handleAuthentication('signin')">ACCESS DECK</button>
-            </div>
-
-            <div class="auth-form-view" id="signUpFormBlock">
-                <div class="input-form-group">
-                    <label>Public Profile Username</label>
-                    <input type="text" id="signUpUser" placeholder="MatrixNomad">
-                </div>
-                <div class="input-form-group">
-                    <label>Identity Email Thread</label>
-                    <input type="email" id="signUpEmail" placeholder="nomad@nexus.matrix">
-                </div>
-                <div class="input-form-group">
-                    <label>Generate Access Code</label>
-                    <input type="password" id="signUpPass" placeholder="••••••••">
-                </div>
-                <button class="publish-submit-btn" onclick="handleAuthentication('signup')">INITIALIZE PROTOCOL</button>
-            </div>
-            
-            <button class="close-auth-card" onclick="closeAuthModal()">TERMINATE PROMPT</button>
-        </div>
-    </div>
-
-    <!-- ENHANCED YOUTUBE-DIMENSION NAVIGATION SYSTEM BASE BAR -->
+    <!-- NAVIGATION TAB ASSIGNMENT BOTTOM STRIP -->
     <nav class="app-bottom-navbar">
         <div class="nav-tab active" id="tab-home" onclick="switchTab('home')">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
+            <i class="fas fa-layer-group"></i>
+            <span>Feed</span>
         </div>
         <div class="nav-tab" id="tab-shorts" onclick="switchTab('shorts')">
-            <i class="fas fa-bolt"></i>
+            <i class="fas fa-bolt-lightning"></i>
             <span>Shorts</span>
         </div>
-        
-        <!-- Center Action Plus Button Customization Form Matrix -->
         <div class="nav-tab action-plus-tab" id="tab-studio" onclick="switchTab('studio')">
-            <div class="plus-icon-frame">
-                <i class="fas fa-plus"></i>
-            </div>
+            <div class="plus-icon-frame"><i class="fas fa-sliders"></i></div>
         </div>
-
-        <div class="nav-tab" id="tab-space" onclick="switchTab('space')">
-            <i class="fas fa-globe"></i>
-            <span>Space</span>
+        <div class="nav-tab" id="tab-history" onclick="switchTab('history')">
+            <i class="fas fa-database"></i>
+            <span>Memory</span>
         </div>
-        <div class="nav-tab" id="tab-wallet" onclick="switchTab('wallet')">
-            <i class="fas fa-wallet"></i>
-            <span>Earnings</span>
+        <div class="nav-tab" id="tab-settings" onclick="switchTab('settings')">
+            <i class="fas fa-gear"></i>
+            <span>Engine</span>
         </div>
     </nav>
 
     <div class="matrix-toast" id="toastContainer"></div>
 
+    <!-- UTILITY INJECTION LAYERS -->
+    <script src="search.js"></script>
+    <script src="history.js"></script>
+    <script src="settings.js"></script>
+    <script src="router.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
