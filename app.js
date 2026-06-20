@@ -302,3 +302,87 @@ function addNewTimestamp() {
 }
 function handleLike() { document.getElementById("likeCount").innerText = parseInt(document.getElementById("likeCount").innerText) + 1; }
 function toggleSubscribe() { const b = document.getElementById("subBtn"); b.innerText = b.innerText === "SUBSCRIBE" ? "SUBSCRIBED" : "SUBSCRIBE"; }
+/**
+ * System Core Orchestrator - Main Social Media Engagement Pipelines
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    // Ingest default data states inside query filters
+    if (typeof resetSearchEngine === "function") {
+        resetSearchEngine();
+    }
+    
+    // Engage hardware countdown monitors
+    if (typeof initializeSystemBudgetTimer === "function") {
+        initializeSystemBudgetTimer();
+    }
+
+    // Monitor core video tracking loops
+    const mainPlayer = document.getElementById("mainVideoNode");
+    if (mainPlayer) {
+        mainPlayer.addEventListener("play", () => {
+            if (typeof logPlaybackEventToHistory === "function") {
+                logPlaybackEventToHistory(document.getElementById("activeVideoTitle").innerText);
+            }
+        });
+    }
+});
+
+function triggerNotification(message, color = "#10b981") {
+    const toast = document.getElementById("toastContainer");
+    if (!toast) return;
+    toast.innerText = message;
+    toast.style.borderLeftColor = color;
+    toast.classList.add("show");
+    setTimeout(() => { toast.classList.remove("show"); }, 2500);
+}
+
+// Media asset injection pipelines
+function executeStudioUpload() {
+    const titleInput = document.getElementById("uploadTitleInput").value.trim();
+    const fileSelector = document.getElementById("mobileVideoSelector");
+    
+    if (titleInput === "") { triggerNotification("Please write an ingestion descriptive metadata header.", "#cc0000"); return; }
+    if (fileSelector.files.length === 0) { triggerNotification("Target digital video asset path absent.", "#cc0000"); return; }
+
+    const file = fileSelector.files[0];
+    const player = document.getElementById("mainVideoNode");
+    const titleDisplay = document.getElementById("activeVideoTitle");
+
+    player.src = URL.createObjectURL(file);
+    player.load();
+    titleDisplay.innerText = titleInput;
+
+    triggerNotification("Broadcaster chunk mounted successfully!", "#10b981");
+    switchTab('home');
+    player.play().catch(() => {});
+}
+
+function playSelectedVideo(event) {
+    const file = event.target.files[0];
+    if (file) {
+        document.getElementById("uploadTitleInput").value = file.name.replace(/\.[^/.]+$/, "");
+        triggerNotification("Video package ready for deployment.");
+        switchTab('studio');
+    }
+}
+
+function loadPresetVideo(videoUrl, titleText) {
+    const player = document.getElementById("mainVideoNode");
+    const titleDisplay = document.getElementById("activeVideoTitle");
+    if (!player) return;
+    
+    player.src = videoUrl;
+    player.load();
+    titleDisplay.innerText = titleText;
+    switchTab('home');
+    player.play().catch(() => {});
+}
+
+function addNewTimestamp() {
+    triggerNotification("Narrative time node marker set to local session clip path.");
+}
+
+function toggleSubscribe() { 
+    const b = document.getElementById("subBtn"); 
+    b.innerText = b.innerText.includes("FOLLOW") ? "CHRONOLOGICALLY LOCKED" : "FOLLOW CHRONOLOGICALLY"; 
+}
