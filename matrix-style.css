@@ -1,11 +1,21 @@
 :root {
-    --bg-main: #0a0a0c;
-    --bg-card: #141419;
-    --bg-input: #1e1e24;
-    --accent: #10b981;
-    --text-main: #f3f4f6;
-    --text-dark-muted: #9ca3af;
-    --border: rgba(255, 255, 255, 0.07);
+    --bg-main: #070709;
+    --bg-card: #0f0f15;
+    --bg-input: #171721;
+    --accent: #a855f7;          /* Shifted away completely from youtube crimson red to electric violet neon */
+    --text-main: #f8fafc;
+    --text-dark-muted: #64748b;
+    --border: rgba(168, 85, 247, 0.08);
+}
+
+/* Modifying the global search center elements to be distinct */
+.search-command-center {
+    flex: 1; max-width: 500px; display: flex; align-items: center;
+    background-color: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 2px 4px 2px 14px;
+}
+
+/* Rest of your base components styles remain unchanged from the layout instructions */
+
 }
 
 * {
