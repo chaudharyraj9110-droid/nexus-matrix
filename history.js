@@ -1,5 +1,5 @@
 /**
- * Memory Bank Engine - Handles session isolation and local history tracking
+ * Isolated Cache Logs and Playlist Ingestion Layer
  */
 let historyLogRecords = [];
 let historicalSessionBundles = [];
@@ -12,24 +12,23 @@ function toggleIncognitoMode() {
     
     if (sessionIncognitoState) {
         icon.className = "fas fa-user-secret";
-        icon.style.color = "#f59e0b";
-        label.innerText = "Incognito Lock Active";
-        triggerNotification("Watch tracking suspended for active playback elements.", "#f59e0b");
+        icon.style.color = "var(--accent)";
+        label.innerText = "Log History Off";
+        triggerNotification("Activity history tracking suspended safely.");
     } else {
         icon.className = "fas fa-eye-slash";
         icon.style.color = "inherit";
-        label.innerText = "Standard Session";
-        triggerNotification("History engine active on normal tracking arrays.");
+        label.innerText = "Log History On";
+        triggerNotification("Activity path trail active.");
     }
 }
 
 function logPlaybackEventToHistory(videoTitle) {
-    if (sessionIncognitoState) return; // Drop tracing nodes silently
+    if (sessionIncognitoState) return; 
     
-    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const uuid = Math.floor(Math.random() * 100000);
     
-    // Check and clear identical titles to avoid duplicates
     historyLogRecords = historyLogRecords.filter(node => node.title !== videoTitle);
     
     historyLogRecords.unshift({
@@ -41,23 +40,22 @@ function logPlaybackEventToHistory(videoTitle) {
 
 function createNewSessionBundle() {
     if (historyLogRecords.length === 0) {
-        triggerNotification("Active history cache empty. Cannot compile tracking bundle.", "#cc0000");
+        triggerNotification("Active history log pool empty.", "#cc0000");
         return;
     }
     
-    const bundleId = Math.floor(Math.random() * 10000);
-    const bundleName = prompt("Assign Research Session Folder Label Title:", `Session Log Array #${bundleId}`);
+    const bundleName = prompt("Assign new playlist bundle identifier title:");
     if (!bundleName) return;
 
     historicalSessionBundles.unshift({
-        id: bundleId,
+        id: Math.floor(Math.random() * 10000),
         name: bundleName,
         nodes: [...historyLogRecords]
     });
 
-    historyLogRecords = []; // Flush tracking register into folder arrays
+    historyLogRecords = []; 
     renderHistoryTree();
-    triggerNotification("Session bundle archived inside local memory bank.", "#10b981");
+    triggerNotification("Custom playlist group compiled successfully.");
 }
 
 function deleteSingleHistoryNode(nodeId, bundleId = null) {
@@ -73,14 +71,14 @@ function deleteSingleHistoryNode(nodeId, bundleId = null) {
         historyLogRecords = historyLogRecords.filter(n => n.id !== nodeId);
     }
     renderHistoryTree();
-    triggerNotification("Specific tracking node erased completely.");
+    triggerNotification("Index record entry erased.");
 }
 
 function clearAllHistory() {
     historyLogRecords = [];
     historicalSessionBundles = [];
     renderHistoryTree();
-    triggerNotification("All local memory-bank records purged completely.", "#ef4444");
+    triggerNotification("Local cache index registries flushed completely.");
 }
 
 function renderHistoryTree() {
@@ -88,13 +86,13 @@ function renderHistoryTree() {
     if (!wrapper) return;
     wrapper.innerHTML = "";
 
-    // 1. Present Active Loose Sessions Stack
+    // 1. Current Active Loose Unbundled Records Stack
     const currentContainer = document.createElement("div");
     currentContainer.className = "session-folder-card";
     currentContainer.innerHTML = `
         <div class="folder-header">
-            <div class="folder-title-area"><i class="fas fa-clock-rotate-left" style="color:var(--accent);"></i> Active Watch Buffers</div>
-            <span style="font-size:11px;color:var(--text-dark-muted);">${historyLogRecords.length} items</span>
+            <div class="folder-title-area"><i class="fas fa-timeline" style="color:var(--accent);"></i> Unsaved Session Watch Logs</div>
+            <span style="font-size:11px;color:var(--text-dark-muted);">${historyLogRecords.length} points</span>
         </div>
         <div class="folder-nodes-list" id="activeNodesList"></div>
     `;
@@ -102,27 +100,27 @@ function renderHistoryTree() {
 
     const activeList = currentContainer.querySelector("#activeNodesList");
     if (historyLogRecords.length === 0) {
-        activeList.innerHTML = `<div style="font-size:11px;color:var(--text-dark-muted);padding:6px 0;">No unbundled session entries recorded.</div>`;
+        activeList.innerHTML = `<div style="font-size:11px;color:var(--text-dark-muted);padding:12px;text-align:center;">No recent activity records found in active cache.</div>`;
     } else {
         historyLogRecords.forEach(node => {
             const row = document.createElement("div");
             row.className = "history-node-row";
             row.innerHTML = `
-                <div class="node-meta"><strong>${node.title}</strong><span>Logged at ${node.timeString}</span></div>
+                <div class="node-meta"><strong>${node.title}</strong><span>Indexed at ${node.timeString}</span></div>
                 <button class="delete-node-btn" onclick="deleteSingleHistoryNode(${node.id})">&times;</button>
             `;
             activeList.appendChild(row);
         });
     }
 
-    // 2. Render Bundled Folders Stack
+    // 2. Playlists / Compiled Session Folders Stack
     historicalSessionBundles.forEach(bundle => {
         const fCard = document.createElement("div");
         fCard.className = "session-folder-card";
         fCard.innerHTML = `
             <div class="folder-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
-                <div class="folder-title-area"><i class="fas fa-folder"></i> <span>${bundle.name}</span></div>
-                <span style="font-size:11px;color:var(--text-dark-muted);">${bundle.nodes.length} nodes (Click to Toggle)</span>
+                <div class="folder-title-area"><i class="fas fa-folder-closed"></i> <span>${bundle.name}</span></div>
+                <span style="font-size:11px;color:var(--text-dark-muted);">${bundle.nodes.length} items (Tap to expand)</span>
             </div>
             <div class="folder-nodes-list" style="display:block;"></div>
         `;
@@ -131,7 +129,7 @@ function renderHistoryTree() {
             const row = document.createElement("div");
             row.className = "history-node-row";
             row.innerHTML = `
-                <div class="node-meta"><strong>${node.title}</strong><span>Archived Log Element</span></div>
+                <div class="node-meta"><strong>${node.title}</strong><span>Bundled media node</span></div>
                 <button class="delete-node-btn" onclick="deleteSingleHistoryNode(${node.id}, ${bundle.id})">&times;</button>
             `;
             listContainer.appendChild(row);
@@ -139,3 +137,4 @@ function renderHistoryTree() {
         wrapper.appendChild(fCard);
     });
 }
+
