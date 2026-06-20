@@ -1,7 +1,7 @@
 /**
- * Command-Center Search Engine - Hard Core Text Parsing Pipeline
+ * LoopDeck Core Search Filter Processing Engine
  */
-let searchInLibraryMode = false; // False = Global Network, True = Search Only Inside Local History Storage
+let searchInLibraryMode = false;
 
 const globalVideoNetworkDatabase = [
     { id: 1, url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", title: "Big Buck Bunny Production Open Animation Source", channel: "Blender Foundation", duration: "09:56" },
@@ -14,13 +14,13 @@ function toggleSearchScope() {
     searchInLibraryMode = !searchInLibraryMode;
     const badge = document.getElementById("searchScopeScope");
     if (searchInLibraryMode) {
-        badge.innerHTML = `<i class="fas fa-database"></i> <span>MY LIBRARY</span>`;
+        badge.innerHTML = `<i class="fas fa-box-open"></i> <span>MY RECAP INDEX</span>`;
         badge.classList.add("local-mode");
-        triggerNotification("Search set to local user history context.", "#10b981");
+        triggerNotification("Searching strictly inside personal local history index registries.");
     } else {
-        badge.innerHTML = `<i class="fas fa-globe"></i> <span>GLOBAL</span>`;
+        badge.innerHTML = `<i class="fas fa-network-wired"></i> <span>ALL CONTENT</span>`;
         badge.classList.remove("local-mode");
-        triggerNotification("Search set to global network entries.");
+        triggerNotification("Scanning global platform ledger directories.");
     }
 }
 
@@ -29,7 +29,6 @@ function executeCommandSearch() {
     let rawQuery = inputNode.value.trim().toLowerCase();
     if (rawQuery === "") { renderFeedGrid(globalVideoNetworkDatabase); return; }
 
-    // Parse specific query flags (e.g., "-clickbait" extraction)
     let searchTerms = [];
     let excludedTerms = [];
     
@@ -43,28 +42,23 @@ function executeCommandSearch() {
 
     let targetDataSet = globalVideoNetworkDatabase;
 
-    // Apply Local Library context filter logic if enabled
     if (searchInLibraryMode) {
         targetDataSet = globalVideoNetworkDatabase.filter(item => 
             historyLogRecords.some(historyNode => historyNode.title === item.title)
         );
     }
 
-    // Execute precision filtering match queries
     let filteredResults = targetDataSet.filter(video => {
         const title = video.title.toLowerCase();
         const channel = video.channel.toLowerCase();
 
-        // 1. Must match standard keywords if any exist
         let matchesSearch = searchTerms.length === 0 || searchTerms.every(term => title.includes(term) || channel.includes(term));
-        // 2. Must not match any excluded terms
         let containsExcluded = excludedTerms.some(term => title.includes(term) || channel.includes(term));
 
         return matchesSearch && !containsExcluded;
     });
 
     renderFeedGrid(filteredResults);
-    triggerNotification(`Found ${filteredResults.length} matches across storage arrays.`, "#10b981");
 }
 
 function resetSearchEngine() {
@@ -75,10 +69,10 @@ function resetSearchEngine() {
 function renderFeedGrid(dataset) {
     const grid = document.getElementById("mainVideoFeedGrid");
     if (!grid) return;
-    grid.innerHTML = `<h3 class="feed-section-heading">Filter Space Matrix Results (${dataset.length})</h3>`;
+    grid.innerHTML = `<h3 class="feed-section-heading">Discovered Index Streams (${dataset.length})</h3>`;
     
     if (dataset.length === 0) {
-        grid.innerHTML += `<div style="padding:40px 0;text-align:center;color:var(--text-dark-muted);font-size:12px;">No non-excluded assets found matching constraints.</div>`;
+        grid.innerHTML += `<div style="padding:40px 0;text-align:center;color:var(--text-dark-muted);font-size:12px;">No matching index paths found matching the keyword filters.</div>`;
         return;
     }
 
@@ -99,4 +93,3 @@ function renderFeedGrid(dataset) {
         grid.appendChild(card);
     });
 }
-
