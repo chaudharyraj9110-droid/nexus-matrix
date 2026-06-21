@@ -1,5 +1,5 @@
 /**
- * Isolated Cache Logs and Playlist Ingestion Layer
+ * Isolated Cache Logs and Playlist Grouping Engine
  */
 let historyLogRecords = [];
 let historicalSessionBundles = [];
@@ -12,14 +12,14 @@ function toggleIncognitoMode() {
     
     if (sessionIncognitoState) {
         icon.className = "fas fa-user-secret";
-        icon.style.color = "var(--accent)";
-        label.innerText = "Log History Off";
-        triggerNotification("Activity history tracking suspended safely.");
+        icon.style.color = "var(--accent-glow)";
+        label.innerText = "Log History On";
+        triggerNotification("🔒 Privacy Matrix active. Local activity caching and history logs safely paused.", "var(--accent-glow)");
     } else {
         icon.className = "fas fa-eye-slash";
         icon.style.color = "inherit";
-        label.innerText = "Log History On";
-        triggerNotification("Activity path trail active.");
+        label.innerText = "Log History Off";
+        triggerNotification("👁️ Privacy Matrix offline. Chronological history tracking resumed.", "var(--accent)");
     }
 }
 
@@ -30,17 +30,12 @@ function logPlaybackEventToHistory(videoTitle) {
     const uuid = Math.floor(Math.random() * 100000);
     
     historyLogRecords = historyLogRecords.filter(node => node.title !== videoTitle);
-    
-    historyLogRecords.unshift({
-        id: uuid,
-        title: videoTitle,
-        timeString: timestamp
-    });
+    historyLogRecords.unshift({ id: uuid, title: videoTitle, timeString: timestamp });
 }
 
 function createNewSessionBundle() {
     if (historyLogRecords.length === 0) {
-        triggerNotification("Active history log pool empty.", "#cc0000");
+        triggerNotification("Active history log pool empty.", "#ef4444");
         return;
     }
     
@@ -86,12 +81,12 @@ function renderHistoryTree() {
     if (!wrapper) return;
     wrapper.innerHTML = "";
 
-    // 1. Current Active Loose Unbundled Records Stack
+    // Unsorted Cache Track Frame
     const currentContainer = document.createElement("div");
     currentContainer.className = "session-folder-card";
     currentContainer.innerHTML = `
         <div class="folder-header">
-            <div class="folder-title-area"><i class="fas fa-timeline" style="color:var(--accent);"></i> Unsaved Session Watch Logs</div>
+            <div class="folder-title-area"><i class="fas fa-timeline"></i> Recent Loose Session Watch Logs</div>
             <span style="font-size:11px;color:var(--text-dark-muted);">${historyLogRecords.length} points</span>
         </div>
         <div class="folder-nodes-list" id="activeNodesList"></div>
@@ -100,25 +95,25 @@ function renderHistoryTree() {
 
     const activeList = currentContainer.querySelector("#activeNodesList");
     if (historyLogRecords.length === 0) {
-        activeList.innerHTML = `<div style="font-size:11px;color:var(--text-dark-muted);padding:12px;text-align:center;">No recent activity records found in active cache.</div>`;
+        activeList.innerHTML = `<div style="font-size:11px;color:var(--text-dark-muted);padding:12px;text-align:center;">No recent activity records found in active cache registries.</div>`;
     } else {
         historyLogRecords.forEach(node => {
             const row = document.createElement("div");
             row.className = "history-node-row";
             row.innerHTML = `
-                <div class="node-meta"><strong>${node.title}</strong><span>Indexed at ${node.timeString}</span></div>
+                <div class="node-meta"><strong>${node.title}</strong><span>Indexed today at ${node.timeString}</span></div>
                 <button class="delete-node-btn" onclick="deleteSingleHistoryNode(${node.id})">&times;</button>
             `;
             activeList.appendChild(row);
         });
     }
 
-    // 2. Playlists / Compiled Session Folders Stack
+    // Custom Playlists Bundles 
     historicalSessionBundles.forEach(bundle => {
         const fCard = document.createElement("div");
         fCard.className = "session-folder-card";
         fCard.innerHTML = `
-            <div class="folder-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+            <div class="folder-header" onclick="this.nextElementSibling.style.with = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
                 <div class="folder-title-area"><i class="fas fa-folder-closed"></i> <span>${bundle.name}</span></div>
                 <span style="font-size:11px;color:var(--text-dark-muted);">${bundle.nodes.length} items (Tap to expand)</span>
             </div>
@@ -137,4 +132,3 @@ function renderHistoryTree() {
         wrapper.appendChild(fCard);
     });
 }
-
