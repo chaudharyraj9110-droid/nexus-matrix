@@ -12,24 +12,24 @@
     <!-- LOOPDECK NAVIGATION HEADER -->
     <header class="app-header">
         <div class="logo-area" onclick="switchTab('home')">
-            <i class="fas fa-circle-nodes" style="color: #a855f7; font-size: 22px;"></i>
+            <i class="fas fa-circle-nodes"></i>
             <span>LoopDeck</span>
         </div>
         
-        <!-- Smart Exclusion Search Engine -->
+        <!-- Advanced Exclusion Search Center -->
         <div class="search-command-center">
             <div class="search-bar-wrapper">
-                <input type="text" id="globalSearchInput" placeholder="Search channels or topics... (use -keyword to block)" onkeydown="if(event.key==='Enter') executeCommandSearch()">
+                <input type="text" id="globalSearchInput" placeholder="Search videos, spaces, or creators... (use -keyword to block topics)" onkeydown="if(event.key==='Enter') executeCommandSearch()">
                 <button class="clear-search-btn" onclick="resetSearchEngine()">&times;</button>
             </div>
-            <div class="search-scope-toggle" id="searchScopeScope" onclick="toggleSearchScope()" title="Switch Search Index Filter">
-                <i class="fas fa-network-wired"></i> <span>ALL CONTENT</span>
+            <div class="search-scope-toggle" id="searchScopeScope" onclick="toggleSearchScope()">
+                <i class="fas fa-network-wired"></i> <span>ALL CONTENT INDEX</span>
             </div>
         </div>
 
         <div class="header-actions">
-            <button class="icon-notification-btn" onclick="triggerNotification('Alerts center cleared.')">
-                <i class="far fa-bell" style="color: var(--text-main);"></i>
+            <button class="icon-notification-btn" onclick="triggerNotification('Alerts center cleared. No pending network broadcasts.')">
+                <i class="far fa-bell"></i>
             </button>
             <div class="user-profile-node" id="headerProfileAvatar" onclick="switchTab('settings')">
                 <i class="far fa-user"></i>
@@ -37,30 +37,30 @@
         </div>
     </header>
 
-    <!-- VIEWPPORT LAYOUT ROUTER CONTAINER -->
+    <!-- VIEWPORT LAYOUT ROUTER CONTAINER -->
     <main class="app-main-body">
 
-        <!-- TAB 1: MAIN UNBIASED CHRONOLOGICAL FEED -->
+        <!-- TAB 1: THE STREAM (MAIN FEED) -->
         <div id="homeScreen" class="app-screen active">
             <div class="view-scroll-container">
                 
-                <!-- Channel Update Circles Stacks -->
+                <!-- Creator Story Aggregators -->
                 <div class="instagram-stories-strip">
                     <div class="story-ring active" onclick="loadPresetVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 'VFX Lab: Elephants Dream Special')">
-                        <div class="story-avatar" style="background: #3b82f6;">VFX</div>
+                        <div class="story-avatar" style="background: #2563eb;">VFX</div>
                         <span>VFX Lab</span>
                     </div>
                     <div class="story-ring active" onclick="loadPresetVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', 'Blaze Tech: Hardware Infrastructure Overview')">
-                        <div class="story-avatar" style="background: #ec4899;">BT</div>
+                        <div class="story-avatar" style="background: #db2777;">BT</div>
                         <span>BlazeTech</span>
                     </div>
                     <div class="story-ring" onclick="triggerNotification('No active timeline updates.')">
-                        <div class="story-avatar" style="background: #10b981;">QD</div>
+                        <div class="story-avatar" style="background: #059669;">QD</div>
                         <span>Quantum</span>
                     </div>
                 </div>
 
-                <!-- Primary Desktop & Mobile Media Player Node Layout -->
+                <!-- Playback Canvas Engine Layout -->
                 <section class="main-player-block">
                     <video id="mainVideoNode" controls autoplay crossorigin="anonymous" poster="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800">
                         <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
@@ -70,27 +70,27 @@
                         <h1 id="activeVideoTitle" class="video-display-title">Big Buck Bunny Production Open Animation Source</h1>
                         <div class="interaction-tray">
                             <button class="action-pill-btn" onclick="toggleIncognitoMode()"><i class="fas fa-eye-slash" id="incognitoIcon"></i> <span id="incognitoTxt">Log History Off</span></button>
-                            <button class="action-pill-btn" onclick="addNewTimestamp()"><i class="fas fa-folder-plus"></i> Collect to List</button>
-                            <button class="subscribe-premium-btn" id="subBtn" onclick="toggleSubscribe()">Pin Channel</button>
+                            <button class="action-pill-btn" onclick="addNewTimestamp()"><i class="fas fa-folder-plus"></i> Collect to Bundle Folder</button>
+                            <button class="subscribe-premium-btn" id="subBtn" onclick="toggleSubscribe()">+ Pin Channel</button>
                         </div>
                     </div>
                 </section>
 
-                <!-- Non-Algorithmic Video Inventory Block -->
+                <!-- Video Feed Grid Layout -->
                 <section class="video-feed-grid" id="mainVideoFeedGrid">
-                    <h3 class="feed-section-heading">Timeline Stream</h3>
+                    <h3 class="feed-section-heading">Timeline Feed</h3>
                     <!-- Dynamic rendering inside search.js -->
                 </section>
             </div>
         </div>
 
-        <!-- TAB 2: VERTICAL LOOP SNAPS FEED PLAYER -->
+        <!-- TAB 2: MICRO-LOOPS (SHORTS) -->
         <div id="shortsScreen" class="app-screen">
             <div class="shorts-vertical-slider">
                 <div class="short-video-container">
                     <video class="short-video-player" loop muted autoplay playsinline src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"></video>
                     <div class="short-meta-sidebar">
-                        <div class="sidebar-action" onclick="triggerNotification('Added to saved items.')"><i class="fas fa-bookmark"></i><span>Collect</span></div>
+                        <div class="sidebar-action" onclick="triggerNotification('Node cached safely inside your default collection.')"><i class="fas fa-bookmark"></i><span>Collect</span></div>
                         <div class="sidebar-action" onclick="triggerNotification('Topic filter applied.')"><i class="fas fa-eye-slash"></i><span>Filter Out</span></div>
                     </div>
                     <div class="short-info-overlay">
@@ -101,58 +101,57 @@
             </div>
         </div>
 
-        <!-- TAB 3: LOCAL WORKSPACE STUDIO IMPORT PANEL -->
+        <!-- TAB 3: LAUNCH ASSET SUITE (STUDIO) -->
         <div id="studioScreen" class="app-screen">
             <div class="studio-workspace-card">
                 <h3>Import Local Media Assets</h3>
-                <p class="studio-subtext">Add file bundles directly from your local hardware storage drive array.</p>
+                <p class="studio-subtext">Add media file bundles directly from your local hardware storage drive array.</p>
                 
                 <div class="drop-zone-box" onclick="document.getElementById('mobileVideoSelector').click()">
-                    <i class="fas fa-file-video" style="font-size: 42px; color: #a855f7; margin-bottom: 12px;"></i>
+                    <i class="fas fa-file-video"></i>
                     <p>Select target media package file</p>
-                    <span class="file-spec-tag">Accepts all standard digital media video tracks</span>
+                    <span class="file-spec-tag">Accepts all standard digital video container files up to 8K resolutions</span>
                 </div>
                 <input type="file" id="mobileVideoSelector" accept="video/*" style="display: none;" onchange="playSelectedVideo(event)">
 
                 <div class="input-form-group">
-                    <label>Dashboard Presentation Title Label</label>
+                    <label>Dashboard Presentation Title Label (Required)</label>
                     <input type="text" id="uploadTitleInput" placeholder="Assign specific workspace name text...">
                 </div>
 
-                <button class="publish-submit-btn" onclick="executeStudioUpload()">MOUNT INTO FEED</button>
+                <button class="publish-submit-btn" onclick="executeStudioUpload()">MOUNT INTO STREAM</button>
             </div>
         </div>
 
-        <!-- TAB 4: PRIVACY-CENTRIC TIMELINE HISTORY LOGS -->
+        <!-- TAB 4: MY VAULT (HISTORY/PLAYLISTS) -->
         <div id="historyScreen" class="app-screen">
             <div class="history-dashboard-header">
                 <h3>My Media Index</h3>
                 <p>Track your local activity trails, compiled playlists, and offline sandbox configurations.</p>
                 
                 <div class="history-action-row">
-                    <button class="history-control-btn" onclick="clearAllHistory()"><i class="fas fa-eraser"></i> Wipe Cache</button>
+                    <button class="history-control-btn" onclick="clearAllHistory()"><i class="fas fa-eraser"></i> Wipe Cache Indices</button>
                     <button class="history-control-btn" onclick="createNewSessionBundle()"><i class="fas fa-box-archive"></i> Bundle Custom Playlist</button>
                 </div>
             </div>
 
-            <!-- Playlists & Node Records Stack Containers -->
             <div class="history-sessions-wrapper" id="historySessionsContainer">
                 <!-- Dynamic rendering inside history.js -->
             </div>
         </div>
 
-        <!-- TAB 5: SYSTEM AND LAYOUT DESIGN CONFIGURATORS -->
+        <!-- TAB 5: PREFERENCES (SETTINGS) -->
         <div id="settingsScreen" class="app-screen">
             <div class="settings-layout-container">
                 <h3>Dashboard Preferences</h3>
                 <p class="settings-subtext">Adjust the structural layout engine blocks, tracking systems, and view configurations.</p>
 
-                <!-- Section 1: Modular Interface Switches -->
+                <!-- Section 1: UI Flags -->
                 <div class="settings-group-card">
                     <h4>Component Configurations</h4>
                     <div class="toggle-control-row">
                         <div class="toggle-meta">
-                            <strong>Snaps Loop Player</strong>
+                            <strong>Snaps Loop Player Grid</strong>
                             <p>Enable or isolate the short-form mobile vertical view mechanics.</p>
                         </div>
                         <label class="switch-ui-box">
@@ -172,7 +171,7 @@
                     </div>
                 </div>
 
-                <!-- Section 2: Audio & Compression Rules -->
+                <!-- Section 2: Bandwidth & Performance -->
                 <div class="settings-group-card">
                     <h4>Bandwidth Constraints</h4>
                     <div class="toggle-control-row">
@@ -199,7 +198,7 @@
                     </div>
                 </div>
 
-                <!-- Section 3: Reminders and Usage Metrics Controls -->
+                <!-- Section 3: Time Limits -->
                 <div class="settings-group-card">
                     <h4>Focus Monitors</h4>
                     <div class="toggle-control-row">
@@ -216,29 +215,29 @@
                 </div>
 
                 <div style="padding: 10px; text-align: center; font-size: 11px; color: var(--text-dark-muted);">
-                    LoopDeck Engine Build Core v5.1.0-OSS
+                    LoopDeck Engine Build Core v5.1.0-OSS (Optimized Platform Layout)
                 </div>
             </div>
         </div>
 
     </main>
 
-    <!-- BOTTOM PRESENTATION ACTION TAB LAYOUT STRIP -->
+    <!-- APP BOTTOM PRESENTATION NAVIGATION BAR -->
     <nav class="app-bottom-navbar">
         <div class="nav-tab active" id="tab-home" onclick="switchTab('home')">
             <i class="fas fa-chart-simple"></i>
-            <span>Timeline</span>
+            <span>The Stream</span>
         </div>
         <div class="nav-tab" id="tab-shorts" onclick="switchTab('shorts')">
             <i class="fas fa-circle-play"></i>
-            <span>Snaps</span>
+            <span>Micro-Loops</span>
         </div>
         <div class="nav-tab action-plus-tab" id="tab-studio" onclick="switchTab('studio')">
             <div class="plus-icon-frame"><i class="fas fa-plus"></i></div>
         </div>
         <div class="nav-tab" id="tab-history" onclick="switchTab('history')">
             <i class="fas fa-boxes-stacked"></i>
-            <span>My Index</span>
+            <span>My Vault</span>
         </div>
         <div class="nav-tab" id="tab-settings" onclick="switchTab('settings')">
             <i class="fas fa-sliders"></i>
@@ -248,7 +247,7 @@
 
     <div class="matrix-toast" id="toastContainer"></div>
 
-    <!-- PIPELINE INJECTIONS -->
+    <!-- SCRIPT PIPELINES -->
     <script src="search.js"></script>
     <script src="history.js"></script>
     <script src="settings.js"></script>
