@@ -1,30 +1,37 @@
 /**
- * Router Node Engine - Coordinates tab navigation and system-level states
+ * Tab Navigation Router
  */
-function switchTab(targetTabId) {
-    // 1. Terminate view layouts cleanly
-    document.querySelectorAll('.app-screen').forEach(screen => screen.classList.remove('active'));
-    document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+function switchTab(targetScreenId) {
+    // Hide all view screens
+    document.querySelectorAll(".app-screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
 
-    // 2. Map interface node state arrays
-    const targetScreen = document.getElementById(`${targetTabId}Screen`);
-    const targetTabBtn = document.getElementById(`tab-${targetTabId}`);
+    // Handle view mapping aliases to match production strings
+    let resolvedId = targetScreenId;
+    if (targetScreenId === 'home') resolvedId = 'homeScreen';
+    if (targetScreenId === 'shorts') resolvedId = 'shortsScreen';
+    if (targetScreenId === 'studio') resolvedId = 'studioScreen';
+    if (targetScreenId === 'history') resolvedId = 'historyScreen';
+    if (targetScreenId === 'settings') resolvedId = 'settingsScreen';
+
+    const targetElement = document.getElementById(resolvedId);
+    if (targetElement) {
+        targetElement.classList.add("active");
+    }
+
+    // Toggle navigation buttons colors tracking states
+    document.querySelectorAll(".nav-tab").forEach(tab => {
+        tab.classList.remove("active");
+    });
     
-    if (targetScreen && targetTabBtn) {
-        targetScreen.classList.add('active');
-        targetTabBtn.classList.add('active');
+    const activeTabButton = document.getElementById(`tab-${targetScreenId}`);
+    if (activeTabButton) {
+        activeTabButton.classList.add("active");
     }
 
-    // 3. Coordinate runtime media updates
-    const shortPlayer = document.querySelector('.short-video-player');
-    if (targetTabId === 'shorts') {
-        if (shortPlayer) shortPlayer.play().catch(() => {});
-    } else {
-        if (shortPlayer) shortPlayer.pause();
-    }
-
-    // Refresh memory bank views on mount
-    if (targetTabId === 'history') {
+    // Lazy sync history layout tree when opening Vault tab
+    if (targetScreenId === 'history' && typeof renderHistoryTree === 'function') {
         renderHistoryTree();
     }
 }
