@@ -1,5 +1,6 @@
+
 /**
- * LoopDeck Core Search Filter Processing Engine
+ * LoopDeck Search Registry Filtration Core Engine
  */
 let searchInLibraryMode = false;
 
@@ -16,11 +17,11 @@ function toggleSearchScope() {
     if (searchInLibraryMode) {
         badge.innerHTML = `<i class="fas fa-box-open"></i> <span>MY RECAP INDEX</span>`;
         badge.classList.add("local-mode");
-        triggerNotification("Searching strictly inside personal local history index registries.");
+        triggerNotification("Swapping search context from global network to local history indexes.", "var(--accent-glow)");
     } else {
-        badge.innerHTML = `<i class="fas fa-network-wired"></i> <span>ALL CONTENT</span>`;
+        badge.innerHTML = `<i class="fas fa-network-wired"></i> <span>ALL CONTENT INDEX</span>`;
         badge.classList.remove("local-mode");
-        triggerNotification("Scanning global platform ledger directories.");
+        triggerNotification("Scanning global community platform database registries.", "var(--accent)");
     }
 }
 
@@ -32,6 +33,7 @@ function executeCommandSearch() {
     let searchTerms = [];
     let excludedTerms = [];
     
+    // Parse tokens for advanced logic (-keyword to block topics)
     rawQuery.split(" ").forEach(token => {
         if (token.startsWith("-") && token.length > 1) {
             excludedTerms.push(token.substring(1));
