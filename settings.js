@@ -1,5 +1,5 @@
 /**
- * User Interface Modularization and Focus Settings Layer
+ * UI Component Controls and Anti-Doomscroll Focus Loop Management
  */
 let dailyScreenTimeSeconds = 0;
 let userDefinedDailyMaxSeconds = Infinity;
@@ -19,7 +19,7 @@ function applyInterfaceConfiguration() {
 
     const mainVideo = document.getElementById("mainVideoNode");
     if (mainVideo) {
-        mainVideo.style.opacity = audioOnly ? "0.05" : "1";
+        mainVideo.style.opacity = audioOnly ? "0.02" : "1";
     }
 
     if (maxTimeMinutes === "none") {
@@ -43,7 +43,7 @@ function initializeSystemBudgetTimer() {
             dailyScreenTimeSeconds++;
             if (dailyScreenTimeSeconds >= userDefinedDailyMaxSeconds) {
                 document.body.classList.add("budget-exhausted");
-                triggerNotification("Daily viewing budget limit encountered. Interface grayscale forced.", "#ef4444");
+                triggerNotification("🚨 Daily viewing budget limit encountered. Interface grayscale forced.", "#ef4444");
             }
         }
     }, 1000);
